@@ -35,7 +35,7 @@ function getArtData(weather) {
   xhr.send();
 }
 
-getArtData('autumn');
+getArtData('weather');
 
 function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
