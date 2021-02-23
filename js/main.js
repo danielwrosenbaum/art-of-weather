@@ -18,6 +18,7 @@ function getArtData(weather) {
     $randomBackground.setAttribute('alt', $newPicAlt);
     $backgroundPic.prepend($randomBackground);
     var $imageContainer = document.createElement('div');
+    $imageContainer.className = 'image-container';
     $getWeatherPage.prepend($imageContainer);
     var $newImage = document.createElement('img');
     $newImage.setAttribute('src', $newPic);
@@ -34,7 +35,7 @@ function getArtData(weather) {
   xhr.send();
 }
 
-getArtData('weather');
+getArtData('autumn');
 
 function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
