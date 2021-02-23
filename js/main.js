@@ -3,15 +3,22 @@ var $backButton = document.querySelector('.back-button');
 var $backgroundPic = document.querySelector('.background-pic');
 var $goButton = document.querySelector('.go-button');
 var $getButton = document.querySelector('.get-button');
+var $viewButton = document.querySelector('.view-button');
 var $homePage = document.querySelector('.homepage');
+var $viewPage = document.querySelector('.viewpage');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $goButton.addEventListener('click', goForward);
+$viewButton.addEventListener('click', goToView);
 
 function goToGet(event) {
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
+}
+function goToView(event) {
+  $homePage.className = 'homepage hidden';
+  $viewPage.className = 'viewpage';
 
 }
 function getArtData(weather) {
