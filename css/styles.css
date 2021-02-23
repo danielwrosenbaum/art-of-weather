@@ -4,3 +4,12 @@
   display: flex;
   justify-content: center;
 }
+
+.main-container {
+  margin: 5%;
+}
+
+img {
+  width: 100%;
+  border-radius: 5%;
+}
