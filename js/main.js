@@ -31,7 +31,7 @@ function getArtData(weather) {
   xhr.send();
 }
 
-getArtData('autumn');
+getArtData('weather');
 
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
