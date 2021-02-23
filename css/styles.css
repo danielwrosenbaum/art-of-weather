@@ -61,6 +61,13 @@ img {
   padding: 15px 0 25px 0;
 }
 
+.submit-button {
+  padding: 5px 15px;
+  border-radius: 25px;
+  background-color: rgba(69, 123, 157, 0.65);
+  color: rgb(241, 250, 238);
+}
+
 .back-button {
   padding: 5px 20px;
   font-size: large;
