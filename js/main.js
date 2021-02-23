@@ -2,10 +2,18 @@ var $getWeatherPage = document.querySelector('.get-weather');
 var $backButton = document.querySelector('.back-button');
 var $backgroundPic = document.querySelector('.background-pic');
 var $goButton = document.querySelector('.go-button');
+var $getButton = document.querySelector('.get-button');
+var $homePage = document.querySelector('.homepage');
 
+$getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $goButton.addEventListener('click', goForward);
 
+function goToGet(event) {
+  $getWeatherPage.className = 'get-weather view';
+  $homePage.className = 'homepage hidden';
+
+}
 function getArtData(weather) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
@@ -40,6 +48,7 @@ getArtData('snow');
 
 function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
+  $homePage.className = 'homepage view';
 }
 function goForward(event) {
   $getWeatherPage.className = 'get-weather hidden';

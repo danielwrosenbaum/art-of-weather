@@ -10,9 +10,12 @@ header {
 }
 
 .homepage-buttons {
-  margin: 25%;
+  margin: calc(100% / 3);
   text-align: center;
   vertical-align: middle;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .heading-container {
@@ -45,8 +48,6 @@ body {
   height: 100%;
   z-index: 1;
   opacity: 0.4;
-
-  /* min-height: 100%; */
   background-position: center;
   background-size: cover;
 }
@@ -87,10 +88,30 @@ img {
   margin-top: 20px;
 }
 
+.get-button {
+  width: 200px;
+  height: 50px;
+  padding: 5px 20px;
+  background-color: rgba(69, 123, 157, 0.65);
+  color: rgb(241, 250, 238);
+  font-size: large;
+}
+
+.view-button {
+  height: 50px;
+  width: 200px;
+  padding: 5px 20px;
+  font-size: large;
+  background-color: rgba(230, 57, 70, 0.65);
+  color: rgb(241, 250, 238);
+}
+
+.get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
+.get-button:active,
 .go-button:active {
   background-color: rgb(0, 157, 255);
   box-shadow: 0 5px rgba(2, 94, 151, 1);
@@ -105,10 +126,12 @@ img {
   margin-bottom: 20px;
 }
 
+.view-button:hover,
 .back-button:hover {
   background-color: rgb(236, 47, 63);
 }
 
+.view-button:active,
 .back-button:active {
   background-color: rgb(236, 47, 63);
   box-shadow: 0 5px rgb(145, 2, 14);
