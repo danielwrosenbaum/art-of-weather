@@ -2,14 +2,62 @@
   background-color: #1d3557;
   color: white;
   display: flex;
+  text-align: center;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .main-container {
-  margin: 5%;
+  position: relative;
+  margin: 10% 5% 0 5%;
+  z-index: 2;
+}
+
+body {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.25;
+  background-image: url("https://lh5.ggpht.com/2xguyQiApYzypCrX-DU4YJHAyoOErqjQ0UPwNPW9zpbhNRJ7U2j9z3pFU_Oi_Xonbhqy54NT00P4HUISksT37Wv0gLE=s0");
+  background-size: cover;
 }
 
 img {
   width: 100%;
   border-radius: 5%;
+}
+
+.search-container {
+  margin: 25px;
+  text-align: center;
+  padding: 25px;
+}
+
+::placeholder {
+  color: lightgray;
+  text-align: center;
+}
+
+.button-container {
+  text-align: center;
+  padding: 15px 0 25px 0;
+}
+
+.back-button {
+  padding: 5px 20px;
+  font-size: large;
+  border-radius: 30%;
+  background-color: rgba(230, 57, 70, 0.65);
+  color: rgb(241, 250, 238);
 }
