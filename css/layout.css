@@ -10,16 +10,6 @@
   height: 100%;
 }
 
-/* .row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.column-full,
-.column-half {
-  width: 100%;
-} */
-
 @media screen and (min-width: 768px) {
   .main-container,
   .heading-container {
@@ -27,13 +17,4 @@
     height: 100%;
     margin: 0 auto;
   }
-
-  /* .column-full,
-  .column-half {
-    padding: 0 0.75rem;
-  }
-
-  .column-half {
-    width: 50%;
-  } */
 }
