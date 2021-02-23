@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,37 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
+  <div class="background-pic">
+    </div>
   <header>
+    <div class="heading-container">
+      <div class="heading view">
+        <h1>Current Weather by City</h1>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="main-container">
+    <div class="get-weather view">
+      <div class="search-container">
+        <h2>Search by City:</h2>
+        <input class="city-name" type="text" placeholder="City Name">
+        <div class="button-container">
+          <button name="cityName" class="go-button" type="submit">Go!</button>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="back-button">Back</button>
+      </div>
+    </div>
   </main>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
