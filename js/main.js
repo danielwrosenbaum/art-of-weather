@@ -1,5 +1,6 @@
-var $mainContainer = document.querySelector('.main-container');
+// var $mainContainer = document.querySelector('.main-container');
 var $backgroundPic = document.querySelector('.background-pic');
+var $getWeatherPage = document.querySelector('.get-weather');
 
 function getArtData(weather) {
   var xhr = new XMLHttpRequest();
@@ -14,10 +15,11 @@ function getArtData(weather) {
     $randomBackground.setAttribute('alt', $newPicAlt);
     $backgroundPic.prepend($randomBackground);
     var $imageContainer = document.createElement('div');
-    $mainContainer.prepend($imageContainer);
+    $getWeatherPage.prepend($imageContainer);
     var $newImage = document.createElement('img');
     $newImage.setAttribute('src', $newPic);
     $newImage.setAttribute('alt', $newPicAlt);
+    $newImage.className = 'main-pic';
     $imageContainer.prepend($newImage);
     var $newImageTitle = document.createElement('h4');
     $newImageTitle.textContent = xhr.response.artObjects[i].title;
