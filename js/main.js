@@ -6,9 +6,11 @@ var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
+var $viewBackButton = document.createElement('button');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
+$viewBackButton.addEventListener('click', goBack);
 $goButton.addEventListener('click', goForward);
 $viewButton.addEventListener('click', goToView);
 
@@ -19,6 +21,12 @@ function goToGet(event) {
 function goToView(event) {
   $homePage.className = 'homepage hidden';
   $viewPage.className = 'viewpage';
+  var $viewImageContainer = document.createElement('div');
+  $viewImageContainer.className = 'view-container';
+  $viewPage.appendChild($viewImageContainer);
+  $viewBackButton.className = 'back-button';
+  $viewBackButton.textContent = 'Back';
+  $viewPage.appendChild($viewBackButton);
 
 }
 function getArtData(weather) {
@@ -56,6 +64,7 @@ getArtData('snow');
 function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $homePage.className = 'homepage view';
+  $viewPage.className = 'viewpage hidden';
 }
 function goForward(event) {
   $getWeatherPage.className = 'get-weather hidden';
