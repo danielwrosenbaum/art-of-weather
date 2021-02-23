@@ -1,6 +1,9 @@
 // var $mainContainer = document.querySelector('.main-container');
 var $backgroundPic = document.querySelector('.background-pic');
 var $getWeatherPage = document.querySelector('.get-weather');
+var $backButton = document.querySelector('.back-button');
+
+$backButton.addEventListener('click', goBack);
 
 function getArtData(weather) {
   var xhr = new XMLHttpRequest();
@@ -32,6 +35,10 @@ function getArtData(weather) {
 }
 
 getArtData('weather');
+
+function goBack(event) {
+  $getWeatherPage.className = 'get-weather hidden';
+}
 
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
