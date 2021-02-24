@@ -52,8 +52,21 @@ input {
   padding: 5px 15px;
 }
 
-.text-align {
-  text-align: center;
+.column-full {
+  width: 100%;
+}
+
+.column-half {
+  width: 50%;
+}
+
+.row {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
 }
 
 .homepage {
@@ -87,17 +100,18 @@ input {
   margin: 10px 0;
 }
 
-.weather-container,
+.weather-container {
+  margin-bottom: 25px;
+  text-align: center;
+  padding: 10px;
+  text-shadow: 2px 2px  rgb(15, 15, 15);
+}
+
 .search-container {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
   text-shadow: 2px 2px 8px gray;
-}
-
-.weather-container {
-  width: 100%;
-  text-align: right;
 }
 
 .background-pic {

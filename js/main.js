@@ -144,31 +144,44 @@ function generateWeatherContent(response) {
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
-    var $iconContainer = document.createElement('div');
-    $weatherContainer.prepend($iconContainer);
-    var $weatherIcon = document.createElement('i');
-    $iconContainer.append($weatherIcon);
+
     var $cityName = document.createElement('h1');
     $cityName.textContent = response.name;
-    $weatherContainer.append($cityName);
-    var newCityTemp = document.createElement('div');
+    $cityName.className = 'row column-full center';
+    $weatherContainer.prepend($cityName);
+    var $weatherRowContainer = document.createElement('div');
+    $weatherRowContainer.className = 'row center';
+    $weatherContainer.append($weatherRowContainer);
+    var $iconContainer = document.createElement('div');
+    $iconContainer.className = 'column-half';
+    $weatherRowContainer.append($iconContainer);
+    var $weatherIcon = document.createElement('i');
+    $iconContainer.append($weatherIcon);
+    var $conditionsContainer = document.createElement('div');
+    $conditionsContainer.className = 'column-half';
+    $weatherRowContainer.append($conditionsContainer);
+    var newCityTemp = document.createElement('h2');
     newCityTemp.textContent = cityTemp + ' \u00B0F';
-    $weatherContainer.appendChild(newCityTemp);
-    var newCityWeather = document.createElement('div');
+    $conditionsContainer.appendChild(newCityTemp);
+    var newCityWeather = document.createElement('h2');
     newCityWeather.textContent = weatherCondition;
-    $weatherContainer.appendChild(newCityWeather);
+    $conditionsContainer.appendChild(newCityWeather);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
+      $weatherContainer.style.color = 'white';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
+      $weatherContainer.style.color = 'rgb(255, 227, 70)';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
+      $weatherContainer.style.color = 'rgb(156, 156, 253)';
     } else if (weatherCondition === 'Rain') {
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
+      $weatherContainer.style.color = 'blue';
     } else {
       $headerColor.className = 'header normal';
     }
