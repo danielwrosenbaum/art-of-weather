@@ -107,9 +107,13 @@ function goBack(event) {
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
+  $weatherContainer.remove();
+  $weatherHeading.remove();
+  // $imageContainer.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
   $headerColor.className = 'header normal';
+  window.location.reload(true);
   changeBackground('snow');
 }
 
