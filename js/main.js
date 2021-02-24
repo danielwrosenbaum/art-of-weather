@@ -132,7 +132,7 @@ function generateWeatherContent(response) {
   if (response.cod === '404') {
     $weatherPage.prepend($errorContainer);
     var notFound = document.createElement('h1');
-    notFound.className = 'text-align';
+    notFound.className = 'row center';
     notFound.textContent = 'City not found, please try again.';
     $errorContainer.appendChild(notFound);
   } else {
@@ -149,6 +149,10 @@ function generateWeatherContent(response) {
     $cityName.textContent = response.name;
     $cityName.className = 'row column-full center';
     $weatherContainer.prepend($cityName);
+    var $moreText = document.createElement('h3');
+    $moreText.className = 'row column-full center';
+    $moreText.textContent = 'Current Weather Conditions:';
+    $weatherContainer.appendChild($moreText);
     var $weatherRowContainer = document.createElement('div');
     $weatherRowContainer.className = 'row center';
     $weatherContainer.append($weatherRowContainer);
