@@ -85,26 +85,32 @@ function getWeather(cityName) {
   xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
-    var weatherCondition = xhr.response.weather[0].main;
-    $mainHeading.className = 'heading hidden';
-    var $weatherHeading = document.createElement('h1');
-    $weatherHeading.textContent = weatherCondition;
-    $headingContainer.appendChild($weatherHeading);
-    getArtWeather(weatherCondition);
-    var $weatherContainer = document.createElement('div');
-    $weatherContainer.className = 'weather-container';
-    $weatherPage.appendChild($weatherContainer);
-    var $cityName = document.createElement('h1');
-    $cityName.textContent = xhr.response.name;
-    $weatherContainer.prepend($cityName);
-    var newCityTemp = document.createElement('div');
-    newCityTemp.textContent = xhr.response.main.temp + ' \u00B0F';
-    $weatherPage.appendChild(newCityTemp);
-    var newCityWeather = document.createElement('div');
-    newCityWeather.textContent = weatherCondition;
-    $weatherPage.appendChild(newCityWeather);
+    if (xhr.response.cod === '404') {
+      var notFound = document.createElement('h1');
+      notFound.textContent = 'City not found, please try again.';
+      $weatherPage.appendChild(notFound);
+    } else {
+      var cityTemp = Math.trunc(xhr.response.main.temp);
+      var weatherCondition = xhr.response.weather[0].main;
+      $mainHeading.className = 'heading hidden';
+      var $weatherHeading = document.createElement('h1');
+      $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
+      $headingContainer.appendChild($weatherHeading);
+      getArtWeather(weatherCondition);
+      var $weatherContainer = document.createElement('div');
+      $weatherContainer.className = 'weather-container';
+      $weatherPage.appendChild($weatherContainer);
+      var $cityName = document.createElement('h1');
+      $cityName.textContent = xhr.response.name;
+      $weatherContainer.prepend($cityName);
+      var newCityTemp = document.createElement('div');
 
+      newCityTemp.textContent = cityTemp + ' \u00B0F';
+      $weatherPage.appendChild(newCityTemp);
+      var newCityWeather = document.createElement('div');
+      newCityWeather.textContent = weatherCondition;
+      $weatherPage.appendChild(newCityWeather);
+    }
   });
   xhr.send();
 }
