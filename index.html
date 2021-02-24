@@ -34,10 +34,13 @@
     <div class="get-weather hidden">
       <div class="search-container">
         <h2>Search by City:</h2>
-        <input class="city-name" type="text" placeholder="City Name">
-        <div class="button-container">
-          <button name="cityName" class="go-button" type="submit">Go!</button>
-        </div>
+        <form onsubmit="submitCity(event)">
+          <input required name="cityName" type="text" placeholder="City Name">
+          <div class="button-container">
+            <input type="submit" class="go-button" value="Go!">
+          </div>
+        </form>
+
       </div>
       <div class="button-container">
         <button class="back-button">Back</button>
@@ -45,6 +48,9 @@
     </div>
     <div class="viewpage hidden">
       <h1>View Saved Images</h1>
+    </div>
+    <div class="weatherpage hidden">
+
     </div>
   </main>
 

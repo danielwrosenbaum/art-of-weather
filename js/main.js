@@ -6,15 +6,22 @@ var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
+var $weatherPage = document.querySelector('.weatherpage');
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $viewBackButton.addEventListener('click', goBack);
-$goButton.addEventListener('click', goForward);
+$goButton.addEventListener('click', goToWeather);
+$goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 
+function submitCity(event) {
+  event.preventDefault();
+  var cityWeather = event.target.elements.cityName.value;
+  getWeather(cityWeather);
+}
 function goToGet(event) {
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
@@ -66,6 +73,23 @@ function goBack(event) {
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
 }
-function goForward(event) {
+function goToWeather(event) {
   $getWeatherPage.className = 'get-weather hidden';
+  $weatherPage.className = 'weatherpage view';
+
+}
+function getWeather(cityName) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var weatherCondition = xhr.response.weather[0].main;
+    var newCityTemp = document.createElement('div');
+    newCityTemp.textContent = cityName + ' ' + 'current temperature:' + ' ' + xhr.response.main.temp;
+    $weatherPage.appendChild(newCityTemp);
+    var newCityWeather = document.createElement('div');
+    newCityWeather.textContent = cityName + ' ' + 'current conditions:' + ' ' + weatherCondition;
+    $weatherPage.appendChild(newCityWeather);
+  });
+  xhr.send();
 }
