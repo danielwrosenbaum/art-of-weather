@@ -84,7 +84,9 @@ function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
+
   xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
     var weatherCondition = xhr.response.weather[0].main;
     var newCityTemp = document.createElement('div');
     newCityTemp.textContent = cityName + ' ' + 'current temperature:' + ' ' + xhr.response.main.temp;
@@ -96,6 +98,13 @@ function getWeather(cityName) {
     var $weatherHeading = document.createElement('h1');
     $weatherHeading.textContent = weatherCondition;
     $headingContainer.appendChild($weatherHeading);
+    var $weatherContainer = document.createElement('div');
+    $weatherContainer.className = 'weather-container';
+    $weatherPage.appendChild($weatherContainer);
+    var $cityName = document.createElement('h1');
+    $cityName.textContent = xhr.response.name;
+    $weatherContainer.prepend($cityName);
+
   });
   xhr.send();
 }
