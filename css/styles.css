@@ -4,6 +4,39 @@ header {
   z-index: 2;
 }
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h4 {
+  margin: 5px 0 0 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+input,
+button {
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+input {
+  padding: 5px 15px;
+}
+
+.homepage {
+  padding: calc(100% / 3);
+  position: relative;
+}
+
+.viewpage {
+  text-align: center;
+}
+
 .heading-container {
   color: white;
   display: flex;
@@ -18,31 +51,12 @@ header {
   position: relative;
   margin-top: 5%;
   z-index: 2;
-}
-
-body {
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.background-pic {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  opacity: 0.4;
 }
 
-h4 {
-  margin: 5px 0 0 0;
-}
-
-img {
-  width: 100%;
-  height: 100%;
+.button-container {
+  text-align: center;
 }
 
 .search-container {
@@ -52,8 +66,20 @@ img {
   text-shadow: 2px 2px 8px gray;
 }
 
+.background-pic {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.4;
+}
+
 .main-pic {
   border-radius: 5%;
+  max-height: 100%;
 }
 
 ::placeholder {
@@ -61,8 +87,12 @@ img {
   text-align: center;
 }
 
-.button-container {
+.homepage-buttons {
+  margin: calc(100% / 3) auto;
   text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .go-button {
@@ -72,14 +102,22 @@ img {
   margin-top: 20px;
 }
 
-.go-button:hover {
-  background-color: rgba(0, 157, 255, 1);
+.get-button {
+  width: 200px;
+  height: 50px;
+  padding: 5px 20px;
+  background-color: rgba(69, 123, 157, 0.65);
+  color: rgb(241, 250, 238);
+  font-size: large;
 }
 
-.go-button:active {
-  background-color: rgb(0, 157, 255);
-  box-shadow: 0 5px rgba(2, 94, 151, 1);
-  transform: translateY(4px);
+.view-button {
+  height: 50px;
+  width: 200px;
+  padding: 5px 20px;
+  font-size: large;
+  background-color: rgba(230, 57, 70, 0.65);
+  color: rgb(241, 250, 238);
 }
 
 .back-button {
@@ -90,23 +128,30 @@ img {
   margin-bottom: 20px;
 }
 
+.view-back-button {
+  float: bottom;
+}
+
+.get-button:hover,
+.go-button:hover {
+  background-color: rgba(0, 157, 255, 1);
+}
+
+.get-button:active,
+.go-button:active {
+  background-color: rgb(0, 157, 255);
+  box-shadow: 0 5px rgba(2, 94, 151, 1);
+  transform: translateY(4px);
+}
+
+.view-button:hover,
 .back-button:hover {
   background-color: rgb(236, 47, 63);
 }
 
+.view-button:active,
 .back-button:active {
   background-color: rgb(236, 47, 63);
   box-shadow: 0 5px rgb(145, 2, 14);
   transform: translateY(4px);
-}
-
-input,
-button {
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
-  border: none;
-}
-
-input {
-  padding: 5px 15px;
 }
