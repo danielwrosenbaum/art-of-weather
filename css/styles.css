@@ -64,13 +64,20 @@ input {
 
 .button-container {
   text-align: center;
+  margin: 10px 0;
 }
 
+.weather-container,
 .search-container {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
   text-shadow: 2px 2px 8px gray;
+}
+
+.weather-container {
+  width: 100%;
+  text-align: right;
 }
 
 .background-pic {

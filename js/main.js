@@ -12,6 +12,9 @@ var $weatherPage = document.querySelector('.weatherpage');
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
 var $weatherBackButton = document.createElement('button');
+var $errorContainer = document.createElement('div');
+var $backButtonContainer = document.createElement('div');
+var $weatherHeading = document.createElement('h1');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -41,6 +44,21 @@ function goToView(event) {
   $viewPage.appendChild($viewBackButton);
 
 }
+function changeBackground(weather) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var i = Math.floor(Math.random() * xhr.response.artObjects.length);
+    var $newPic = xhr.response.artObjects[i].webImage.url;
+    var $newPicAlt = xhr.response.artObjects[i].title;
+    $randomBackground.setAttribute('src', $newPic);
+    $randomBackground.setAttribute('alt', $newPicAlt);
+    $backgroundPic.prepend($randomBackground);
+  });
+  xhr.send();
+}
+
 function getArtData(weather) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
@@ -76,7 +94,12 @@ function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
+  $weatherPage.className = 'weatherpage hidden';
+  $mainHeading.className = 'heading view';
+  $weatherHeading.className = 'hidden';
+  changeBackground('snow');
 }
+
 function goToWeather(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $weatherPage.className = 'weatherpage view';
@@ -88,15 +111,15 @@ function getWeather(cityName) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     if (xhr.response.cod === '404') {
+      $weatherPage.prepend($errorContainer);
       var notFound = document.createElement('h1');
       notFound.className = 'text-align';
       notFound.textContent = 'City not found, please try again.';
-      $weatherPage.appendChild(notFound);
+      $errorContainer.appendChild(notFound);
     } else {
       var cityTemp = Math.trunc(xhr.response.main.temp);
       var weatherCondition = xhr.response.weather[0].main;
       $mainHeading.className = 'heading hidden';
-      var $weatherHeading = document.createElement('h1');
       $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
       $headingContainer.appendChild($weatherHeading);
       getArtWeather(weatherCondition);
@@ -105,19 +128,19 @@ function getWeather(cityName) {
       $weatherPage.appendChild($weatherContainer);
       var $cityName = document.createElement('h1');
       $cityName.textContent = xhr.response.name;
-      $weatherContainer.prepend($cityName);
+      $weatherContainer.append($cityName);
       var newCityTemp = document.createElement('div');
       newCityTemp.textContent = cityTemp + ' \u00B0F';
-      $weatherPage.appendChild(newCityTemp);
+      $weatherContainer.appendChild(newCityTemp);
       var newCityWeather = document.createElement('div');
       newCityWeather.textContent = weatherCondition;
-      $weatherPage.appendChild(newCityWeather);
+      $weatherContainer.appendChild(newCityWeather);
     }
-
+    $weatherPage.appendChild($backButtonContainer);
+    $backButtonContainer.className = 'button-container';
     $weatherBackButton.className = 'back-button';
     $weatherBackButton.textContent = 'Back';
-    $weatherPage.appendChild($weatherBackButton);
-
+    $backButtonContainer.appendChild($weatherBackButton);
   });
   xhr.send();
 }
