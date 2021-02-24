@@ -7,6 +7,7 @@ var $viewButton = document.querySelector('.view-button');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
 var $viewBackButton = document.createElement('button');
+var $randomBackground = document.createElement('img');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -37,7 +38,6 @@ function getArtData(weather) {
     var i = Math.floor(Math.random() * xhr.response.artObjects.length);
     var $newPic = xhr.response.artObjects[i].webImage.url;
     var $newPicAlt = xhr.response.artObjects[i].title;
-    var $randomBackground = document.createElement('img');
     $randomBackground.setAttribute('src', $newPic);
     $randomBackground.setAttribute('alt', $newPicAlt);
     $backgroundPic.prepend($randomBackground);
