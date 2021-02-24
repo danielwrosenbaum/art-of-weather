@@ -1,7 +1,11 @@
 header {
-  background-color: #1d3557;
   position: relative;
   z-index: 2;
+}
+
+.normal {
+  background-color: #1d3557;
+  color: white;
 }
 
 body {
@@ -28,6 +32,10 @@ input {
   padding: 5px 15px;
 }
 
+.text-align {
+  text-align: center;
+}
+
 .homepage {
   padding: calc(100% / 3);
   position: relative;
@@ -38,7 +46,6 @@ input {
 }
 
 .heading-container {
-  color: white;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -57,13 +64,20 @@ input {
 
 .button-container {
   text-align: center;
+  margin: 10px 0;
 }
 
+.weather-container,
 .search-container {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
   text-shadow: 2px 2px 8px gray;
+}
+
+.weather-container {
+  width: 100%;
+  text-align: right;
 }
 
 .background-pic {
