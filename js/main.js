@@ -1,4 +1,6 @@
 var $getWeatherPage = document.querySelector('.get-weather');
+var $headingContainer = document.querySelector('.heading-container');
+var $mainHeading = document.querySelector('.heading');
 var $backButton = document.querySelector('.back-button');
 var $backgroundPic = document.querySelector('.background-pic');
 var $goButton = document.querySelector('.go-button');
@@ -90,6 +92,10 @@ function getWeather(cityName) {
     var newCityWeather = document.createElement('div');
     newCityWeather.textContent = cityName + ' ' + 'current conditions:' + ' ' + weatherCondition;
     $weatherPage.appendChild(newCityWeather);
+    $mainHeading.className = 'heading hidden';
+    var $weatherHeading = document.createElement('h1');
+    $weatherHeading.textContent = weatherCondition;
+    $headingContainer.appendChild($weatherHeading);
   });
   xhr.send();
 }
