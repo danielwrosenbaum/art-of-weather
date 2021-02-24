@@ -10,6 +10,7 @@ var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
+var $headerColor = document.querySelector('.header');
 
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
@@ -108,6 +109,7 @@ function goBack(event) {
   $weatherPage.className = 'weatherpage hidden';
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
+  $headerColor.className = 'header normal';
   changeBackground('snow');
 }
 
@@ -151,6 +153,17 @@ function generateWeatherContent(response) {
     var newCityWeather = document.createElement('div');
     newCityWeather.textContent = weatherCondition;
     $weatherContainer.appendChild(newCityWeather);
+    if (weatherCondition === 'Clouds') {
+      $headerColor.className = 'header clouds';
+    } else if (weatherCondition === 'Clear') {
+      $headerColor.className = 'header clear';
+    } else if (weatherCondition === 'Snow') {
+      $headerColor.className = 'header snow';
+    } else if (weatherCondition === 'Rain') {
+      $headerColor.className = 'header rain';
+    } else {
+      $headerColor.className = 'header normal';
+    }
   }
   $weatherPage.appendChild($backButtonContainer);
   $backButtonContainer.className = 'button-container';

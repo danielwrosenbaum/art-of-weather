@@ -8,6 +8,26 @@ header {
   color: white;
 }
 
+.clouds {
+  background-color: gray;
+  color: white;
+}
+
+.clear {
+  background-color: skyblue;
+  color: rgb(255, 227, 70);
+}
+
+.snow {
+  background-color: rgb(244, 244, 255);
+  color: rgb(156, 156, 253);
+}
+
+.rain {
+  background-color: gray;
+  color: blue;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
