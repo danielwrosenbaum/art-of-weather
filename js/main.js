@@ -9,12 +9,16 @@ var $viewButton = document.querySelector('.view-button');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
+var $form = document.querySelector('.city-form');
+
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
 var $weatherBackButton = document.createElement('button');
 var $errorContainer = document.createElement('div');
 var $backButtonContainer = document.createElement('div');
 var $weatherHeading = document.createElement('h1');
+var $weatherContainer = document.createElement('div');
+var $imageContainer = document.createElement('div');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -70,7 +74,6 @@ function getArtData(weather) {
     $randomBackground.setAttribute('src', $newPic);
     $randomBackground.setAttribute('alt', $newPicAlt);
     $backgroundPic.prepend($randomBackground);
-    var $imageContainer = document.createElement('div');
     $imageContainer.className = 'image-container';
     $getWeatherPage.prepend($imageContainer);
     var $newImage = document.createElement('img');
@@ -123,7 +126,6 @@ function getWeather(cityName) {
       $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
       $headingContainer.appendChild($weatherHeading);
       getArtWeather(weatherCondition);
-      var $weatherContainer = document.createElement('div');
       $weatherContainer.className = 'weather-container';
       $weatherPage.appendChild($weatherContainer);
       var $cityName = document.createElement('h1');
@@ -141,6 +143,7 @@ function getWeather(cityName) {
     $weatherBackButton.className = 'back-button';
     $weatherBackButton.textContent = 'Back';
     $backButtonContainer.appendChild($weatherBackButton);
+    $form.reset();
   });
   xhr.send();
 }
