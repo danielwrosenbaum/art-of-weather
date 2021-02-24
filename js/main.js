@@ -11,6 +11,7 @@ var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
+var $weatherBackButton = document.createElement('button');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -18,6 +19,7 @@ $viewBackButton.addEventListener('click', goBack);
 $goButton.addEventListener('click', goToWeather);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
+$weatherBackButton.addEventListener('click', goBack);
 
 function submitCity(event) {
   event.preventDefault();
@@ -87,6 +89,7 @@ function getWeather(cityName) {
   xhr.addEventListener('load', function () {
     if (xhr.response.cod === '404') {
       var notFound = document.createElement('h1');
+      notFound.className = 'text-align';
       notFound.textContent = 'City not found, please try again.';
       $weatherPage.appendChild(notFound);
     } else {
@@ -104,13 +107,17 @@ function getWeather(cityName) {
       $cityName.textContent = xhr.response.name;
       $weatherContainer.prepend($cityName);
       var newCityTemp = document.createElement('div');
-
       newCityTemp.textContent = cityTemp + ' \u00B0F';
       $weatherPage.appendChild(newCityTemp);
       var newCityWeather = document.createElement('div');
       newCityWeather.textContent = weatherCondition;
       $weatherPage.appendChild(newCityWeather);
     }
+
+    $weatherBackButton.className = 'back-button';
+    $weatherBackButton.textContent = 'Back';
+    $weatherPage.appendChild($weatherBackButton);
+
   });
   xhr.send();
 }
