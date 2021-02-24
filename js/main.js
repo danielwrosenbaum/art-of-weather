@@ -144,6 +144,10 @@ function generateWeatherContent(response) {
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
+    var $iconContainer = document.createElement('div');
+    $weatherContainer.prepend($iconContainer);
+    var $weatherIcon = document.createElement('i');
+    $iconContainer.append($weatherIcon);
     var $cityName = document.createElement('h1');
     $cityName.textContent = response.name;
     $weatherContainer.append($cityName);
@@ -155,12 +159,16 @@ function generateWeatherContent(response) {
     $weatherContainer.appendChild(newCityWeather);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
+      $weatherIcon.className = 'fas fa-cloud fa-7x';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
+      $weatherIcon.className = 'fas fa-sun fa-7x';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
+      $weatherIcon.className = 'far fa-snowflake fa-7x';
     } else if (weatherCondition === 'Rain') {
       $headerColor.className = 'header rain';
+      $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
     } else {
       $headerColor.className = 'header normal';
     }
