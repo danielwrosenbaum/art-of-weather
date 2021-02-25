@@ -23,6 +23,7 @@ var $weatherImageContainer = document.createElement('div');
 var $viewBackButton = document.createElement('button');
 var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
+var $popUpSave = document.createElement('div');
 
 var $newPic;
 var $newPicTitle;
@@ -36,6 +37,9 @@ $goButton.addEventListener('click', goToWeather);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
+$weatherSaveButton.addEventListener('click', saveImageData);
+window.addEventListener('DOMContentLoaded', function () {
+});
 
 getArtData('snow');
 function submitCity(event) {
@@ -263,9 +267,15 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
+  $popUpSave.textContent = 'Image Saved!';
+  $popUpSave.className = 'saved';
+  $weatherPage.appendChild($popUpSave);
+  window.setTimeout(function () {
+    closePopUp();
+  }, 2000);
+
 }
 
-$weatherSaveButton.addEventListener('click', saveImageData);
-
-window.addEventListener('DOMContentLoaded', function () {
-});
+function closePopUp() {
+  $popUpSave.className = 'hidden';
+}

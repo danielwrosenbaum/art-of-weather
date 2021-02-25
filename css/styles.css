@@ -224,3 +224,20 @@ input {
   box-shadow: 0 5px rgb(145, 2, 14);
   transform: translateY(4px);
 }
+
+.saved {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  width: 75px;
+  height: 50px;
+  background-color: rgba(139, 244, 248, 0.75);
+  box-shadow: 0 3px rgba(114, 203, 206, 0.65);
+  color: black;
+  top: 80%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -37.5px;
+  border-radius: 25%;
+}
