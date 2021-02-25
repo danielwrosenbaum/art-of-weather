@@ -20,6 +20,7 @@ var $backButtonContainer = document.createElement('div');
 var $weatherHeading = document.createElement('h1');
 var $weatherContainer = document.createElement('div');
 var $imageContainer = document.createElement('div');
+var $weatherImageContainer = document.createElement('div');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -70,6 +71,9 @@ function generateRandomBackground(response) {
 
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
+  if (weather === 'Clear') {
+    weather = 'Sun';
+  }
   xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
@@ -107,14 +111,20 @@ function goBack(event) {
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
-  $weatherContainer.remove();
-  $weatherHeading.remove();
-  // $imageContainer.remove();
+  $headerColor.className = 'header normal';
+  removeWeatherInfo($weatherContainer);
+  removeWeatherInfo($weatherImageContainer);
+  removeWeatherInfo($weatherHeading);
+  // $weatherHeading.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
-  $headerColor.className = 'header normal';
-  window.location.reload(true);
   changeBackground('snow');
+}
+
+function removeWeatherInfo(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
 
 function goToWeather(event) {
@@ -145,9 +155,9 @@ function generateWeatherContent(response) {
     $mainHeading.className = 'heading hidden';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
     $headingContainer.appendChild($weatherHeading);
-    if (weatherCondition === 'Clear') {
-      weatherCondition = 'Sun';
-    }
+    // if (weatherCondition === 'Clear') {
+    //   weatherCondition = 'Sun';
+    // }
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
@@ -181,11 +191,11 @@ function generateWeatherContent(response) {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
       $weatherContainer.style.color = 'white';
-    } else if (weatherCondition === 'Sun') {
+    } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = 'rgb(255, 227, 70)';
-      newCityWeather.textContent = 'Clear';
+      // newCityWeather.textContent = 'Clear';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
@@ -223,18 +233,18 @@ function generateWeatherPicture(response) {
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
-  var $imageContainer = document.createElement('div');
-  $imageContainer.className = 'image-container';
-  $weatherPage.prepend($imageContainer);
+
+  $weatherImageContainer.className = 'image-container';
+  $weatherPage.prepend($weatherImageContainer);
   var $newImage = document.createElement('img');
   $newImage.setAttribute('src', $newPic);
   $newImage.setAttribute('alt', $newPicAlt);
   $newImage.className = 'main-pic';
-  $imageContainer.prepend($newImage);
+  $weatherImageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
   $newImageTitle.textContent = response.artObjects[i].title;
-  $imageContainer.appendChild($newImageTitle);
+  $weatherImageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
-  $imageContainer.appendChild($newImageArtist);
+  $weatherImageContainer.appendChild($newImageArtist);
 }
