@@ -24,6 +24,11 @@ var $viewBackButton = document.createElement('button');
 var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
 
+var $newPic;
+var $newPicTitle;
+var $newArtistName;
+var $newPicAlt;
+
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $viewBackButton.addEventListener('click', goBack);
@@ -55,7 +60,7 @@ function goToView(event) {
 }
 function changeBackground(weather) {
   var xhr4 = new XMLHttpRequest();
-  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr4.responseType = 'json';
   xhr4.addEventListener('load', function () {
     generateRandomBackground(xhr4.response);
@@ -76,7 +81,7 @@ function generateRandomBackground(response) {
 
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
-  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
     generateGetWeatherPage(xhr3.response);
@@ -219,7 +224,7 @@ function getArtWeather(weather) {
     weather = 'Sun';
   }
   var xhr2 = new XMLHttpRequest();
-  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr2.responseType = 'json';
   xhr2.addEventListener('load', function () {
     generateWeatherPicture(xhr2.response);
@@ -229,10 +234,10 @@ function getArtWeather(weather) {
 
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  var $newPic = response.artObjects[i].webImage.url;
-  var $newPicTitle = response.artObjects[i].title;
-  var $newArtistName = response.artObjects[i].principalOrFirstMaker;
-  var $newPicAlt = $newPicTitle + ' ' + 'by' + ' ' + $newArtistName;
+  $newPic = response.artObjects[i].webImage.url;
+  $newPicTitle = response.artObjects[i].title;
+  $newArtistName = response.artObjects[i].principalOrFirstMaker;
+  $newPicAlt = $newPicTitle + ' ' + 'by' + ' ' + $newArtistName;
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
@@ -252,5 +257,12 @@ function generateWeatherPicture(response) {
 }
 
 // function saveImageData(event) {
-
+//   var $pictureData = {
+//     imageUrl: $newPic,
+//     title: $newPicTitle,
+//     artist: $newArtistName
+//     console.log($pictureData)
+//   };
 // }
+
+// $weatherSaveButton.addEventListener('click', saveImageData);

@@ -1,6 +1,6 @@
 /* exported data */
-var $mainPic = document.querySelector('.main-pic');
+// var $mainPic = document.querySelector('.main-pic');
 
-$mainPic.addEventListener('load', function () {
+// $mainPic.addEventListener('load', function () {
 
-});
+// });
