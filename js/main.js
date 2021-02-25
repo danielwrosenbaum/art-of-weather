@@ -55,6 +55,13 @@ function goToView(event) {
   var $viewImageContainer = document.createElement('div');
   $viewImageContainer.className = 'view-container';
   $viewPage.appendChild($viewImageContainer);
+  for (var i = 0; i < data.entries.length; i++) {
+    var $newViewImage = document.createElement('img');
+    $newViewImage.className = 'column-half view-image-pic';
+    $newViewImage.setAttribute('src', data.entries[i].imageUrl);
+    $newViewImage.setAttribute('alt', data.entries[i].title + ' ' + 'by' + ' ' + data.entries[i].artist);
+    $viewImageContainer.prepend($newViewImage);
+  }
   $viewBackButton.className = 'back-button';
   $viewBackButton.textContent = 'Back';
   $viewPage.appendChild($viewBackButton);
