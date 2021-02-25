@@ -6,8 +6,7 @@ var data = {
 };
 
 var $paintingStorage = localStorage.getItem('painting-storage');
-window.addEventListener('load', function () {
-});
+
 if ($paintingStorage !== null) {
   data = JSON.parse($paintingStorage);
 }

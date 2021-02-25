@@ -38,8 +38,6 @@ $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
 $weatherSaveButton.addEventListener('click', saveImageData);
-window.addEventListener('DOMContentLoaded', function () {
-});
 
 getArtData('snow');
 function submitCity(event) {
