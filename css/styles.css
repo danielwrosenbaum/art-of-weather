@@ -200,11 +200,13 @@ input {
   float: bottom;
 }
 
+.weather-save-button:hover,
 .get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
+.weather-save-button:active,
 .get-button:active,
 .go-button:active {
   background-color: rgb(0, 157, 255);
