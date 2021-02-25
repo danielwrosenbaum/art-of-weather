@@ -70,6 +70,10 @@ input {
   text-align: center;
 }
 
+.space {
+  justify-content: space-between;
+}
+
 .homepage {
   padding: calc(100% / 3);
   position: relative;
@@ -174,6 +178,14 @@ input {
   padding: 5px 20px;
   font-size: large;
   background-color: rgba(230, 57, 70, 0.65);
+  color: rgb(241, 250, 238);
+  margin-bottom: 20px;
+}
+
+.weather-view-button {
+  padding: 5px 20px;
+  font-size: large;
+  background-color: rgba(69, 123, 157, 0.65);
   color: rgb(241, 250, 238);
   margin-bottom: 20px;
 }

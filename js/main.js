@@ -12,16 +12,17 @@ var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
 
-var $newImage = document.createElement('img');
-var $viewBackButton = document.createElement('button');
-var $randomBackground = document.createElement('img');
-var $weatherBackButton = document.createElement('button');
-var $errorContainer = document.createElement('div');
-var $backButtonContainer = document.createElement('div');
 var $weatherHeading = document.createElement('h1');
+var $randomBackground = document.createElement('img');
+var $newImage = document.createElement('img');
+var $backButtonContainer = document.createElement('div');
+var $errorContainer = document.createElement('div');
 var $weatherContainer = document.createElement('div');
 var $imageContainer = document.createElement('div');
 var $weatherImageContainer = document.createElement('div');
+var $viewBackButton = document.createElement('button');
+var $weatherBackButton = document.createElement('button');
+var $weatherSaveButton = document.createElement('button');
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -203,10 +204,13 @@ function generateWeatherContent(response) {
     }
   }
   $weatherPage.appendChild($backButtonContainer);
-  $backButtonContainer.className = 'button-container';
+  $backButtonContainer.className = 'button-container row space';
   $weatherBackButton.className = 'back-button';
   $weatherBackButton.textContent = 'Back';
   $backButtonContainer.appendChild($weatherBackButton);
+  $backButtonContainer.appendChild($weatherSaveButton);
+  $weatherSaveButton.className = 'weather-view-button';
+  $weatherSaveButton.textContent = 'Save Image';
   $form.reset();
 }
 
