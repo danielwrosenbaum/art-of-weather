@@ -263,7 +263,9 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
-  // console.log(data.entries);
 }
 
 $weatherSaveButton.addEventListener('click', saveImageData);
+
+window.addEventListener('DOMContentLoaded', function () {
+});
