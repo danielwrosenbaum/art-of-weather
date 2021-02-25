@@ -209,7 +209,7 @@ function generateWeatherContent(response) {
   $weatherBackButton.textContent = 'Back';
   $backButtonContainer.appendChild($weatherBackButton);
   $backButtonContainer.appendChild($weatherSaveButton);
-  $weatherSaveButton.className = 'weather-view-button';
+  $weatherSaveButton.className = 'weather-save-button';
   $weatherSaveButton.textContent = 'Save Image';
   $form.reset();
 }
