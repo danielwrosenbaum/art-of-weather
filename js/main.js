@@ -98,7 +98,6 @@ function generateGetWeatherPage(response) {
   $backgroundPic.prepend($randomBackground);
   $imageContainer.className = 'image-container';
   $getWeatherPage.prepend($imageContainer);
-
   $newImage.setAttribute('src', $newPic);
   $newImage.setAttribute('alt', $newPicAlt);
   $newImage.className = 'main-pic';
@@ -195,7 +194,6 @@ function generateWeatherContent(response) {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = 'rgb(255, 227, 70)';
-      // newCityWeather.textContent = 'Clear';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
@@ -256,13 +254,16 @@ function generateWeatherPicture(response) {
   $weatherImageContainer.appendChild($newImageArtist);
 }
 
-// function saveImageData(event) {
-//   var $pictureData = {
-//     imageUrl: $newPic,
-//     title: $newPicTitle,
-//     artist: $newArtistName
-//     console.log($pictureData)
-//   };
-// }
+function saveImageData(event) {
+  var $pictureData = {
+    imageUrl: $newPic,
+    title: $newPicTitle,
+    artist: $newArtistName,
+    id: data.nextEntryId
+  };
+  data.entries.unshift($pictureData);
+  data.nextEntryId++;
+  // console.log(data.entries);
+}
 
-// $weatherSaveButton.addEventListener('click', saveImageData);
+$weatherSaveButton.addEventListener('click', saveImageData);
