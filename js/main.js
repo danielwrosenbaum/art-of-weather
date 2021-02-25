@@ -12,16 +12,23 @@ var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
 
-var $newImage = document.createElement('img');
-var $viewBackButton = document.createElement('button');
-var $randomBackground = document.createElement('img');
-var $weatherBackButton = document.createElement('button');
-var $errorContainer = document.createElement('div');
-var $backButtonContainer = document.createElement('div');
 var $weatherHeading = document.createElement('h1');
+var $randomBackground = document.createElement('img');
+var $newImage = document.createElement('img');
+var $backButtonContainer = document.createElement('div');
+var $errorContainer = document.createElement('div');
 var $weatherContainer = document.createElement('div');
 var $imageContainer = document.createElement('div');
 var $weatherImageContainer = document.createElement('div');
+var $viewBackButton = document.createElement('button');
+var $weatherBackButton = document.createElement('button');
+var $weatherSaveButton = document.createElement('button');
+var $popUpSave = document.createElement('div');
+
+var $newPic;
+var $newPicTitle;
+var $newArtistName;
+var $newPicAlt;
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -30,6 +37,7 @@ $goButton.addEventListener('click', goToWeather);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
+$weatherSaveButton.addEventListener('click', saveImageData);
 
 getArtData('snow');
 function submitCity(event) {
@@ -54,7 +62,7 @@ function goToView(event) {
 }
 function changeBackground(weather) {
   var xhr4 = new XMLHttpRequest();
-  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr4.responseType = 'json';
   xhr4.addEventListener('load', function () {
     generateRandomBackground(xhr4.response);
@@ -75,7 +83,7 @@ function generateRandomBackground(response) {
 
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
-  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
     generateGetWeatherPage(xhr3.response);
@@ -92,7 +100,6 @@ function generateGetWeatherPage(response) {
   $backgroundPic.prepend($randomBackground);
   $imageContainer.className = 'image-container';
   $getWeatherPage.prepend($imageContainer);
-
   $newImage.setAttribute('src', $newPic);
   $newImage.setAttribute('alt', $newPicAlt);
   $newImage.className = 'main-pic';
@@ -189,7 +196,6 @@ function generateWeatherContent(response) {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = 'rgb(255, 227, 70)';
-      // newCityWeather.textContent = 'Clear';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
@@ -203,10 +209,13 @@ function generateWeatherContent(response) {
     }
   }
   $weatherPage.appendChild($backButtonContainer);
-  $backButtonContainer.className = 'button-container';
+  $backButtonContainer.className = 'button-container row space';
   $weatherBackButton.className = 'back-button';
   $weatherBackButton.textContent = 'Back';
   $backButtonContainer.appendChild($weatherBackButton);
+  $backButtonContainer.appendChild($weatherSaveButton);
+  $weatherSaveButton.className = 'weather-save-button';
+  $weatherSaveButton.textContent = 'Save Image';
   $form.reset();
 }
 
@@ -215,7 +224,7 @@ function getArtWeather(weather) {
     weather = 'Sun';
   }
   var xhr2 = new XMLHttpRequest();
-  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
+  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr2.responseType = 'json';
   xhr2.addEventListener('load', function () {
     generateWeatherPicture(xhr2.response);
@@ -225,8 +234,10 @@ function getArtWeather(weather) {
 
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  var $newPic = response.artObjects[i].webImage.url;
-  var $newPicAlt = response.artObjects[i].title;
+  $newPic = response.artObjects[i].webImage.url;
+  $newPicTitle = response.artObjects[i].title;
+  $newArtistName = response.artObjects[i].principalOrFirstMaker;
+  $newPicAlt = $newPicTitle + ' ' + 'by' + ' ' + $newArtistName;
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
@@ -238,9 +249,31 @@ function generateWeatherPicture(response) {
   $newImage.className = 'main-pic';
   $weatherImageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = response.artObjects[i].title;
+  $newImageTitle.textContent = $newPicTitle;
   $weatherImageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
+  $newImageArtist.textContent = $newArtistName;
   $weatherImageContainer.appendChild($newImageArtist);
+}
+
+function saveImageData(event) {
+  var $pictureData = {
+    imageUrl: $newPic,
+    title: $newPicTitle,
+    artist: $newArtistName,
+    id: data.nextEntryId
+  };
+  data.entries.unshift($pictureData);
+  data.nextEntryId++;
+  $popUpSave.textContent = 'Image Saved!';
+  $popUpSave.className = 'saved';
+  $weatherPage.appendChild($popUpSave);
+  window.setTimeout(function () {
+    closePopUp();
+  }, 2000);
+
+}
+
+function closePopUp() {
+  $popUpSave.className = 'hidden';
 }

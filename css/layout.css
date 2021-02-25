@@ -2,12 +2,16 @@
   display: none !important;
 }
 
+.homepage-buttons {
+  margin: 50% auto;
+}
+
 .main-container,
 .heading-container,
 .image-container {
   max-width: 575px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   height: 100%;
 }
 
@@ -18,5 +22,9 @@
     max-width: 900px;
     height: 100%;
     margin: 0 auto;
+  }
+
+  .homepage-buttons {
+    margin: 25% auto;
   }
 }

@@ -70,9 +70,14 @@ input {
   text-align: center;
 }
 
+.space {
+  justify-content: space-between;
+}
+
 .homepage {
-  padding: calc(100% / 3);
-  position: relative;
+  /* padding: calc(100% / 3);
+  position: relative; */
+  margin-top: 25%;
 }
 
 .viewpage {
@@ -98,7 +103,6 @@ input {
 
 .button-container {
   text-align: center;
-  margin: 10px 0;
 }
 
 .weather-container {
@@ -138,11 +142,9 @@ input {
 }
 
 .homepage-buttons {
-  margin: calc(100% / 3) auto;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
 }
 
 .go-button {
@@ -171,10 +173,24 @@ input {
 }
 
 .back-button {
+  width: 140px;
+  height: 40px;
   padding: 5px 20px;
   font-size: large;
   background-color: rgba(230, 57, 70, 0.65);
   color: rgb(241, 250, 238);
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.weather-save-button {
+  width: 140px;
+  height: 40px;
+  padding: 5px 20px;
+  font-size: large;
+  background-color: rgba(69, 123, 157, 0.65);
+  color: rgb(241, 250, 238);
+  margin-top: 25px;
   margin-bottom: 20px;
 }
 
@@ -182,11 +198,13 @@ input {
   float: bottom;
 }
 
+.weather-save-button:hover,
 .get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
+.weather-save-button:active,
 .get-button:active,
 .go-button:active {
   background-color: rgb(0, 157, 255);
@@ -204,4 +222,21 @@ input {
   background-color: rgb(236, 47, 63);
   box-shadow: 0 5px rgb(145, 2, 14);
   transform: translateY(4px);
+}
+
+.saved {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  width: 100px;
+  height: 50px;
+  background-color: rgba(171, 242, 245, 0.75);
+  box-shadow: 0 3px rgba(114, 203, 206, 0.65);
+  color: black;
+  top: 85%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -50px;
+  border-radius: 25%;
 }
