@@ -142,7 +142,6 @@ input {
 }
 
 .homepage-buttons {
-  margin: 50% auto;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
@@ -230,14 +229,14 @@ input {
   align-items: center;
   text-align: center;
   position: fixed;
-  width: 75px;
+  width: 100px;
   height: 50px;
-  background-color: rgba(139, 244, 248, 0.75);
+  background-color: rgba(171, 242, 245, 0.75);
   box-shadow: 0 3px rgba(114, 203, 206, 0.65);
   color: black;
-  top: 80%;
+  top: 85%;
   left: 50%;
   margin-top: -25px;
-  margin-left: -37.5px;
+  margin-left: -50px;
   border-radius: 25%;
 }
