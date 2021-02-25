@@ -12,6 +12,7 @@ var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
 
+var $newImage = document.createElement('img');
 var $viewBackButton = document.createElement('button');
 var $randomBackground = document.createElement('img');
 var $weatherBackButton = document.createElement('button');
@@ -30,6 +31,7 @@ $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
 
+getArtData('snow');
 function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
@@ -38,6 +40,7 @@ function submitCity(event) {
 function goToGet(event) {
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
+  // getArtData('snow');
 }
 function goToView(event) {
   $homePage.className = 'homepage hidden';
@@ -64,6 +67,8 @@ function generateRandomBackground(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   var $newPic = response.artObjects[i].webImage.url;
   var $newPicAlt = response.artObjects[i].title;
+  $newImage.setAttribute('src', $newPic);
+  $newImage.setAttribute('alt', $newPicAlt);
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
@@ -91,7 +96,7 @@ function generateGetWeatherPage(response) {
   $backgroundPic.prepend($randomBackground);
   $imageContainer.className = 'image-container';
   $getWeatherPage.prepend($imageContainer);
-  var $newImage = document.createElement('img');
+
   $newImage.setAttribute('src', $newPic);
   $newImage.setAttribute('alt', $newPicAlt);
   $newImage.className = 'main-pic';
@@ -104,8 +109,6 @@ function generateGetWeatherPage(response) {
   $imageContainer.appendChild($newImageArtist);
 }
 
-getArtData('snow');
-
 function goBack(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $homePage.className = 'homepage view';
@@ -114,7 +117,7 @@ function goBack(event) {
   $headerColor.className = 'header normal';
   removeWeatherInfo($weatherContainer);
   removeWeatherInfo($weatherImageContainer);
-  removeWeatherInfo($weatherHeading);
+  // removeWeatherInfo($weatherHeading);
   // $weatherHeading.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
@@ -153,6 +156,7 @@ function generateWeatherContent(response) {
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
     $mainHeading.className = 'heading hidden';
+    $weatherHeading.className = 'view';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
     $headingContainer.appendChild($weatherHeading);
     // if (weatherCondition === 'Clear') {
