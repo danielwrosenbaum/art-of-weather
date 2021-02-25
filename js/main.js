@@ -40,7 +40,6 @@ function submitCity(event) {
 function goToGet(event) {
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
-  // getArtData('snow');
 }
 function goToView(event) {
   $homePage.className = 'homepage hidden';
@@ -76,9 +75,6 @@ function generateRandomBackground(response) {
 
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
-  if (weather === 'Clear') {
-    weather = 'Sun';
-  }
   xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
@@ -117,8 +113,6 @@ function goBack(event) {
   $headerColor.className = 'header normal';
   removeWeatherInfo($weatherContainer);
   removeWeatherInfo($weatherImageContainer);
-  // removeWeatherInfo($weatherHeading);
-  // $weatherHeading.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
   changeBackground('snow');
@@ -159,13 +153,9 @@ function generateWeatherContent(response) {
     $weatherHeading.className = 'view';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
     $headingContainer.appendChild($weatherHeading);
-    // if (weatherCondition === 'Clear') {
-    //   weatherCondition = 'Sun';
-    // }
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
-
     var $cityName = document.createElement('h1');
     $cityName.textContent = response.name;
     $cityName.className = 'row column-full center';
@@ -221,6 +211,9 @@ function generateWeatherContent(response) {
 }
 
 function getArtWeather(weather) {
+  if (weather === 'Clear') {
+    weather = 'Sun';
+  }
   var xhr2 = new XMLHttpRequest();
   xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&imgonly=true&type=painting&q=' + weather);
   xhr2.responseType = 'json';
@@ -237,7 +230,6 @@ function generateWeatherPicture(response) {
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
-
   $weatherImageContainer.className = 'image-container';
   $weatherPage.prepend($weatherImageContainer);
   var $newImage = document.createElement('img');
