@@ -75,8 +75,9 @@ input {
 }
 
 .homepage {
-  padding: calc(100% / 3);
-  position: relative;
+  /* padding: calc(100% / 3);
+  position: relative; */
+  margin-top: 25%;
 }
 
 .viewpage {
@@ -102,7 +103,6 @@ input {
 
 .button-container {
   text-align: center;
-  margin: 10px 0;
 }
 
 .weather-container {
@@ -142,11 +142,10 @@ input {
 }
 
 .homepage-buttons {
-  margin: calc(100% / 3) auto;
+  margin: 50% auto;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
 }
 
 .go-button {
