@@ -24,6 +24,7 @@ var $viewBackButton = document.createElement('button');
 var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
 var $popUpSave = document.createElement('div');
+var $viewImageContainer = document.createElement('div');
 
 var $newPic;
 var $newPicTitle;
@@ -52,7 +53,7 @@ function goToGet(event) {
 function goToView(event) {
   $homePage.className = 'homepage hidden';
   $viewPage.className = 'viewpage';
-  var $viewImageContainer = document.createElement('div');
+
   $viewImageContainer.className = 'view-container';
   $viewPage.appendChild($viewImageContainer);
   for (var i = 0; i < data.entries.length; i++) {
@@ -125,14 +126,15 @@ function goBack(event) {
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
   $headerColor.className = 'header normal';
-  removeWeatherInfo($weatherContainer);
-  removeWeatherInfo($weatherImageContainer);
+  removeContainer($weatherContainer);
+  removeContainer($weatherImageContainer);
+  removeContainer($viewImageContainer);
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
   changeBackground('snow');
 }
 
-function removeWeatherInfo(parent) {
+function removeContainer(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
