@@ -119,6 +119,19 @@ input {
   text-shadow: 2px 2px 8px gray;
 }
 
+.view-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.view-image-pic {
+  margin: 2.5%;
+  width: 45%;
+  height: 45%;
+}
+
 .background-pic {
   position: fixed;
   left: 0;
