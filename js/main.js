@@ -230,7 +230,9 @@ function getArtWeather(weather) {
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   var $newPic = response.artObjects[i].webImage.url;
-  var $newPicAlt = response.artObjects[i].title;
+  var $newPicTitle = response.artObjects[i].title;
+  var $newArtistName = response.artObjects[i].principalOrFirstMaker;
+  var $newPicAlt = $newPicTitle + ' ' + 'by' + ' ' + $newArtistName;
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
@@ -242,9 +244,13 @@ function generateWeatherPicture(response) {
   $newImage.className = 'main-pic';
   $weatherImageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = response.artObjects[i].title;
+  $newImageTitle.textContent = $newPicTitle;
   $weatherImageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
+  $newImageArtist.textContent = $newArtistName;
   $weatherImageContainer.appendChild($newImageArtist);
 }
+
+// function saveImageData(event) {
+
+// }
