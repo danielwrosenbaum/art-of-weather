@@ -189,7 +189,7 @@ function deleteFromStorage(event) {
           localStorage.setItem('painting-storage', JSON.stringify($parsed));
         });
       }
-      data.nextEntryId--;
+      // data.nextEntryId--;
     }
   }
   removeContainer($viewImageContainer);
