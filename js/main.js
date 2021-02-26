@@ -25,7 +25,6 @@ var $viewBackButton = document.createElement('button');
 var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
 var $deleteButton = document.createElement('button');
-var $popUpSave = document.createElement('div');
 var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
 
@@ -334,9 +333,7 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
-  $popUpSave.textContent = 'Image Saved!';
-  $popUpSave.className = 'saved';
-  $weatherPage.appendChild($popUpSave);
+  $weatherSaveButton.textContent = 'Saved!';
   window.setTimeout(function () {
     closePopUp();
   }, 2000);
@@ -344,5 +341,5 @@ function saveImageData(event) {
 }
 
 function closePopUp() {
-  $popUpSave.className = 'hidden';
+  $weatherSaveButton.textContent = 'Save Image';
 }
