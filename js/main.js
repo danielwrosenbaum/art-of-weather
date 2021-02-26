@@ -75,13 +75,19 @@ function goToView(event) {
 function viewImage(event) {
   var closestId = event.target.closest('img');
   // var idNum = closestId.getAttribute('data-id');
+  var paintingInfo = closestId.getAttribute('alt');
   $viewPage.prepend($viewFullContainer);
+  $viewFullContainer.className = 'view-one';
   var $viewFullImage = document.createElement('img');
   $viewFullImage = closestId;
   $viewFullImage.className = 'view-full';
   $viewFullContainer.append($viewFullImage);
+  var $paintingInfo = document.createElement('h3');
+  $paintingInfo.textContent = paintingInfo;
+  $viewFullContainer.append($paintingInfo);
   removeContainer($viewImageContainer);
   $viewPageHeader.className = 'hidden';
+  $mainHeading.className = 'hidden';
 
 }
 function changeBackground(weather) {
@@ -146,6 +152,7 @@ function goBack(event) {
   removeContainer($weatherImageContainer);
   removeContainer($viewImageContainer);
   removeContainer($viewFullContainer);
+  $viewFullContainer.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
   changeBackground('snow');

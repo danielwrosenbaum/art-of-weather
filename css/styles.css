@@ -137,6 +137,14 @@ input {
   height: 100%;
 }
 
+.view-one {
+  margin-top: 25%;
+  padding-bottom: 5%;
+  margin-bottom: 20%;
+  box-shadow: 5px 5px 10px rgb(100, 100, 100);
+  text-shadow: 2px 2px 4px gray;
+}
+
 .background-pic {
   position: fixed;
   left: 0;
