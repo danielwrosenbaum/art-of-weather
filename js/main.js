@@ -11,8 +11,8 @@ var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
-var $viewPageHeader = document.querySelector('.viewpage-header');
 
+var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
 var $randomBackground = document.createElement('img');
 var $newImage = document.createElement('img');
@@ -57,6 +57,11 @@ function goToGet(event) {
   $homePage.className = 'homepage hidden';
 }
 function goToView(event) {
+  $mainHeading.className = 'heading hidden';
+  $headingContainer.appendChild($viewPageHeader);
+  $viewPageHeader.className = 'view normal';
+  $viewPageHeader.textContent = 'Saved Images';
+
   $homePage.className = 'homepage hidden';
   $viewPage.className = 'viewpage';
   $viewImageContainer.className = 'view-container';
@@ -92,7 +97,7 @@ function viewImage(event) {
   $deleteButton.className = 'delete-button';
   $deleteButton.textContent = 'Delete Image';
   $viewImageContainer.className = 'view-container hidden';
-  $viewPageHeader.className = 'hidden';
+  $viewPageHeader.className = 'viewpage-header hidden';
   $mainHeading.className = 'hidden';
 
 }
@@ -154,6 +159,7 @@ function goBack(event) {
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
   $headerColor.className = 'header normal';
+  $viewPageHeader.className = 'hidden';
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
   removeContainer($viewImageContainer);
@@ -177,7 +183,7 @@ function deleteFromStorage(event) {
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].id === $idNum) {
       data.entries.splice(i, 1);
-      if ($parsed.entries === $idNum) {
+      if ($parsed.entries[i] === $idNum) {
         $parsed.entries.splice(i, 1);
         window.addEventListener('beforeunload', function () {
           localStorage.setItem('painting-storage', JSON.stringify($parsed));
