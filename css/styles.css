@@ -209,6 +209,14 @@ input {
   margin-bottom: 20px;
 }
 
+.delete-button {
+  width: 100px;
+  height: 40px;
+  padding: 5px 10px;
+  background-color: rgba(69, 123, 157, 0.65);
+  color: rgb(241, 250, 238);
+}
+
 .weather-save-button {
   width: 140px;
   height: 40px;
@@ -224,12 +232,14 @@ input {
   float: bottom;
 }
 
+.delete-button:hover,
 .weather-save-button:hover,
 .get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
+.delete-button:active,
 .weather-save-button:active,
 .get-button:active,
 .go-button:active {

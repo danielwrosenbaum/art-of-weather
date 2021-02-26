@@ -24,6 +24,7 @@ var $weatherImageContainer = document.createElement('div');
 var $viewBackButton = document.createElement('button');
 var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
+var $deleteButton = document.createElement('button');
 var $popUpSave = document.createElement('div');
 var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
@@ -32,6 +33,7 @@ var $newPic;
 var $newPicTitle;
 var $newArtistName;
 var $newPicAlt;
+var idNum;
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -42,6 +44,7 @@ $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
 $weatherSaveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
+$deleteButton.addEventListener('click', deleteFromStorage);
 
 getArtData('snow');
 function submitCity(event) {
@@ -56,17 +59,17 @@ function goToGet(event) {
 function goToView(event) {
   $homePage.className = 'homepage hidden';
   $viewPage.className = 'viewpage';
-
   $viewImageContainer.className = 'view-container';
   $viewPage.appendChild($viewImageContainer);
-  // console.log(data.entries);
-  for (var i = 0; i < data.entries.length; i++) {
-    var $newViewImage = document.createElement('img');
-    $newViewImage.className = 'column-half view-image-pic';
-    $newViewImage.setAttribute('src', data.entries[i].imageUrl);
-    $newViewImage.setAttribute('alt', data.entries[i].title + ' ' + 'by' + ' ' + data.entries[i].artist);
-    $newViewImage.setAttribute('data-id', data.entries[i].id);
-    $viewImageContainer.prepend($newViewImage);
+  if (data.entries.length > 0) {
+    for (var i = 0; i < data.entries.length; i++) {
+      var $newViewImage = document.createElement('img');
+      $newViewImage.className = 'column-half view-image-pic';
+      $newViewImage.setAttribute('src', data.entries[i].imageUrl);
+      $newViewImage.setAttribute('alt', data.entries[i].title + ' ' + 'by' + ' ' + data.entries[i].artist);
+      $newViewImage.setAttribute('data-id', data.entries[i].id);
+      $viewImageContainer.prepend($newViewImage);
+    }
   }
   $viewBackButton.className = 'back-button';
   $viewBackButton.textContent = 'Back';
@@ -74,7 +77,7 @@ function goToView(event) {
 }
 function viewImage(event) {
   var closestId = event.target.closest('img');
-  // var idNum = closestId.getAttribute('data-id');
+  idNum = closestId.getAttribute('data-id');
   var paintingInfo = closestId.getAttribute('alt');
   $viewPage.prepend($viewFullContainer);
   $viewFullContainer.className = 'view-one';
@@ -85,7 +88,10 @@ function viewImage(event) {
   var $paintingInfo = document.createElement('h3');
   $paintingInfo.textContent = paintingInfo;
   $viewFullContainer.append($paintingInfo);
-  removeContainer($viewImageContainer);
+  $viewFullContainer.append($deleteButton);
+  $deleteButton.className = 'delete-button';
+  $deleteButton.textContent = 'Delete Image';
+  $viewImageContainer.className = 'view-container hidden';
   $viewPageHeader.className = 'hidden';
   $mainHeading.className = 'hidden';
 
@@ -164,6 +170,25 @@ function removeContainer(parent) {
   }
 }
 
+function deleteFromStorage(event) {
+  var $idNum = Number(idNum);
+  var $storageForRemoval = localStorage.getItem('painting-storage');
+  var $parsed = JSON.parse($storageForRemoval);
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].id === $idNum) {
+      data.entries.splice(i, 1);
+      $parsed.entries.splice(i, 1);
+      window.addEventListener('beforeunload', function () {
+        localStorage.setItem('painting-storage', JSON.stringify($parsed));
+      });
+      data.nextEntryId--;
+    }
+  }
+  removeContainer($viewImageContainer);
+  removeContainer($viewFullContainer);
+  $viewFullContainer.remove();
+  goToView();
+}
 function goToWeather(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $weatherPage.className = 'weatherpage view';
