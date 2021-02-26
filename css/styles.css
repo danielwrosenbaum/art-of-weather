@@ -20,12 +20,12 @@ header {
 
 .snow {
   background-color: rgb(244, 244, 255);
-  color: rgb(156, 156, 253);
+  color: rgb(190, 156, 253);
 }
 
 .rain {
   background-color: gray;
-  color: blue;
+  color: rgba(125, 125, 255, 0.986);
 }
 
 body {

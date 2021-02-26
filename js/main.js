@@ -164,6 +164,7 @@ function goBack(event) {
   removeContainer($weatherImageContainer);
   removeContainer($viewImageContainer);
   removeContainer($viewFullContainer);
+  removeContainer($errorContainer);
   $viewFullContainer.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
@@ -183,7 +184,7 @@ function deleteFromStorage(event) {
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].id === $idNum) {
       data.entries.splice(i, 1);
-      if ($parsed.entries[i] === $idNum) {
+      if ($parsed !== null) {
         $parsed.entries.splice(i, 1);
         window.addEventListener('beforeunload', function () {
           localStorage.setItem('painting-storage', JSON.stringify($parsed));
@@ -219,6 +220,8 @@ function generateWeatherContent(response) {
     notFound.className = 'row center';
     notFound.textContent = 'City not found, please try again.';
     $errorContainer.appendChild(notFound);
+    $backButtonContainer.className = 'button-container row center';
+    $weatherSaveButton.remove();
   } else {
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
@@ -269,19 +272,19 @@ function generateWeatherContent(response) {
     } else if (weatherCondition === 'Rain') {
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
-      $weatherContainer.style.color = 'blue';
+      $weatherContainer.style.color = 'rgba(125, 125, 255, 0.986)';
     } else {
       $headerColor.className = 'header normal';
     }
+    $backButtonContainer.appendChild($weatherSaveButton);
+    $weatherSaveButton.className = 'weather-save-button';
+    $weatherSaveButton.textContent = 'Save Image';
+    $backButtonContainer.className = 'button-container row space';
   }
   $weatherPage.appendChild($backButtonContainer);
-  $backButtonContainer.className = 'button-container row space';
   $weatherBackButton.className = 'back-button';
   $weatherBackButton.textContent = 'Back';
-  $backButtonContainer.appendChild($weatherBackButton);
-  $backButtonContainer.appendChild($weatherSaveButton);
-  $weatherSaveButton.className = 'weather-save-button';
-  $weatherSaveButton.textContent = 'Save Image';
+  $backButtonContainer.prepend($weatherBackButton);
   $form.reset();
 }
 
