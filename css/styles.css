@@ -132,6 +132,11 @@ input {
   height: 45%;
 }
 
+.view-full {
+  width: 100%;
+  height: 100%;
+}
+
 .background-pic {
   position: fixed;
   left: 0;

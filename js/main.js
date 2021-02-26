@@ -11,6 +11,7 @@ var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
+var $viewPageHeader = document.querySelector('.viewpage-header');
 
 var $weatherHeading = document.createElement('h1');
 var $randomBackground = document.createElement('img');
@@ -25,6 +26,7 @@ var $weatherBackButton = document.createElement('button');
 var $weatherSaveButton = document.createElement('button');
 var $popUpSave = document.createElement('div');
 var $viewImageContainer = document.createElement('div');
+var $viewFullContainer = document.createElement('div');
 
 var $newPic;
 var $newPicTitle;
@@ -39,6 +41,7 @@ $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
 $weatherSaveButton.addEventListener('click', saveImageData);
+$viewImageContainer.addEventListener('click', viewImage);
 
 getArtData('snow');
 function submitCity(event) {
@@ -68,6 +71,17 @@ function goToView(event) {
   $viewBackButton.className = 'back-button';
   $viewBackButton.textContent = 'Back';
   $viewPage.appendChild($viewBackButton);
+}
+function viewImage(event) {
+  var closestId = event.target.closest('img');
+  // var idNum = closestId.getAttribute('data-id');
+  $viewPage.prepend($viewFullContainer);
+  var $viewFullImage = document.createElement('img');
+  $viewFullImage = closestId;
+  $viewFullImage.className = 'view-full';
+  $viewFullContainer.append($viewFullImage);
+  removeContainer($viewImageContainer);
+  $viewPageHeader.className = 'hidden';
 
 }
 function changeBackground(weather) {
@@ -131,6 +145,7 @@ function goBack(event) {
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
   removeContainer($viewImageContainer);
+  removeContainer($viewFullContainer);
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
   changeBackground('snow');
