@@ -45,13 +45,20 @@ $weatherSaveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteFromStorage);
 
-getArtData('snow');
+homePageBackground();
+function homePageBackground() {
+  $randomBackground.setAttribute('src', 'https://lh4.ggpht.com/HjpfCsR3sxYtz486QQYsgAnCDVHRtJ3eZsESB_ZCpfDS-msLE9Ty7dri1JQr-ERBGXQwuf0b3Ta5cwtEOVuXvFCiS0c=s0');
+  $backgroundPic.prepend($randomBackground);
+}
+
+// getArtData('snow');
 function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
   getWeather(cityWeather);
 }
 function goToGet(event) {
+  getArtData('snow');
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
 }
@@ -60,7 +67,7 @@ function goToView(event) {
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
-
+  changeBackground('autumn');
   $homePage.className = 'homepage hidden';
   $viewPage.className = 'viewpage';
   $viewImageContainer.className = 'view-container';
@@ -118,7 +125,7 @@ function generateRandomBackground(response) {
   $newImage.setAttribute('alt', $newPicAlt);
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
-  $backgroundPic.prepend($randomBackground);
+
 }
 
 function getArtData(weather) {
@@ -167,7 +174,8 @@ function goBack(event) {
   $viewFullContainer.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
-  changeBackground('snow');
+  homePageBackground();
+  // changeBackground('snow');
 }
 
 function removeContainer(parent) {
@@ -199,7 +207,9 @@ function getWeather(cityName) {
   xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+
     generateWeatherContent(xhr.response);
+    // console.log(xhr.response);
   });
   xhr.send();
 }
