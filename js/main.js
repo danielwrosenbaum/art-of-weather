@@ -178,18 +178,9 @@ function removeContainer(parent) {
 
 function deleteFromStorage(event) {
   var $idNum = Number(idNum);
-  var $storageForRemoval = localStorage.getItem('painting-storage');
-  var $parsed = JSON.parse($storageForRemoval);
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].id === $idNum) {
       data.entries.splice(i, 1);
-      if ($parsed !== null) {
-        $parsed.entries.splice(i, 1);
-        window.addEventListener('beforeunload', function () {
-          localStorage.setItem('painting-storage', JSON.stringify($parsed));
-        });
-      }
-      // data.nextEntryId--;
     }
   }
   removeContainer($viewImageContainer);
@@ -197,6 +188,7 @@ function deleteFromStorage(event) {
   $viewFullContainer.remove();
   goToView();
 }
+
 function goToWeather(event) {
   $getWeatherPage.className = 'get-weather hidden';
   $weatherPage.className = 'weatherpage view';
