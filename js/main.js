@@ -177,10 +177,12 @@ function deleteFromStorage(event) {
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].id === $idNum) {
       data.entries.splice(i, 1);
-      $parsed.entries.splice(i, 1);
-      window.addEventListener('beforeunload', function () {
-        localStorage.setItem('painting-storage', JSON.stringify($parsed));
-      });
+      if ($parsed.entries === $idNum) {
+        $parsed.entries.splice(i, 1);
+        window.addEventListener('beforeunload', function () {
+          localStorage.setItem('painting-storage', JSON.stringify($parsed));
+        });
+      }
       data.nextEntryId--;
     }
   }
