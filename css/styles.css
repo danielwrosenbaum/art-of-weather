@@ -130,12 +130,14 @@ input {
   margin: 2.5%;
   width: 45%;
   height: 45%;
+  box-shadow: 2px 2px 5px gray;
+  border-radius: 5px;
 }
 
 .view-image-pic:active {
   background-color: rgb(81, 83, 83);
   box-shadow: 0 5px rgb(8, 8, 8);
-  transform: translateY(4px);
+  transform: translateY(5px);
 }
 
 .view-full {
@@ -166,6 +168,7 @@ input {
 .main-pic {
   border-radius: 5%;
   max-height: 100%;
+  box-shadow: 5px 5px 10px gray;
 }
 
 ::placeholder {
@@ -270,4 +273,8 @@ button:hover,
 .go-button:hover,
 .view-image-pic:hover {
   cursor: pointer;
+}
+
+.view-image-pic:hover {
+  box-shadow: 5px 5px 15px gray;
 }
