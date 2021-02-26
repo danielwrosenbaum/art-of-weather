@@ -74,6 +74,10 @@ input {
   justify-content: space-between;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .homepage {
   /* padding: calc(100% / 3);
   position: relative; */

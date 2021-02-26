@@ -202,6 +202,7 @@ function goToWeather(event) {
   $weatherPage.className = 'weatherpage view';
 
 }
+
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
@@ -226,6 +227,8 @@ function generateWeatherContent(response) {
   } else {
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
+    var weatherHumidity = 'Humidity:' + ' ' + response.main.humidity + '%';
+    var weatherDescription = response.weather[0].description;
     $mainHeading.className = 'heading hidden';
     $weatherHeading.className = 'view';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
@@ -249,15 +252,22 @@ function generateWeatherContent(response) {
     $weatherRowContainer.append($iconContainer);
     var $weatherIcon = document.createElement('i');
     $iconContainer.append($weatherIcon);
+    var $newCityDescription = document.createElement('h4');
+    $newCityDescription.textContent = weatherDescription;
+    $newCityDescription.className = 'capitalize';
+    $iconContainer.appendChild($newCityDescription);
     var $conditionsContainer = document.createElement('div');
     $conditionsContainer.className = 'column-half';
     $weatherRowContainer.append($conditionsContainer);
     var newCityTemp = document.createElement('h2');
     newCityTemp.textContent = cityTemp + ' \u00B0F';
     $conditionsContainer.appendChild(newCityTemp);
-    var newCityWeather = document.createElement('h2');
+    var newCityWeather = document.createElement('h3');
     newCityWeather.textContent = weatherCondition;
     $conditionsContainer.appendChild(newCityWeather);
+    var newCityHumidity = document.createElement('h4');
+    newCityHumidity.textContent = weatherHumidity;
+    $conditionsContainer.appendChild(newCityHumidity);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
@@ -281,6 +291,7 @@ function generateWeatherContent(response) {
     $weatherSaveButton.className = 'weather-save-button';
     $weatherSaveButton.textContent = 'Save Image';
     $backButtonContainer.className = 'button-container row space';
+
   }
   $weatherPage.appendChild($backButtonContainer);
   $weatherBackButton.className = 'back-button';
