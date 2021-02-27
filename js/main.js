@@ -11,6 +11,8 @@ var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
 var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
+var $footer = document.querySelector('footer');
+var $saveButton = document.querySelector('.save-button');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -22,8 +24,8 @@ var $weatherContainer = document.createElement('div');
 var $imageContainer = document.createElement('div');
 var $weatherImageContainer = document.createElement('div');
 var $viewBackButton = document.createElement('button');
-var $weatherBackButton = document.createElement('button');
-var $weatherSaveButton = document.createElement('button');
+// var $weatherBackButton = document.createElement('button');
+// var $weatherSaveButton = document.createElement('button');
 var $deleteButton = document.createElement('button');
 var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
@@ -33,14 +35,16 @@ var $newPicTitle;
 var $newArtistName;
 var $newPicAlt;
 var idNum;
+var index;
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $viewBackButton.addEventListener('click', goBack);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
-$weatherBackButton.addEventListener('click', goBack);
-$weatherSaveButton.addEventListener('click', saveImageData);
+// $weatherBackButton.addEventListener('click', goBack);
+// $weatherSaveButton.addEventListener('click', saveImageData);
+$saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteFromStorage);
 
@@ -55,15 +59,21 @@ function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
   getWeather(cityWeather);
+  $saveButton.className = 'save-button';
   goToWeather();
 }
 function goToGet(event) {
   getArtData('snow');
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
+  $footer.className = 'view';
+  $saveButton.className = 'hidden';
+
 }
 function goToView(event) {
   $mainHeading.className = 'heading hidden';
+  $footer.className = 'view';
+  $saveButton.className = 'hidden';
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
@@ -82,9 +92,6 @@ function goToView(event) {
       $viewImageContainer.prepend($newViewImage);
     }
   }
-  $viewBackButton.className = 'back-button';
-  $viewBackButton.textContent = 'Back';
-  $viewPage.appendChild($viewBackButton);
 }
 function viewImage(event) {
   var closestId = event.target.closest('img');
@@ -139,9 +146,9 @@ function getArtData(weather) {
 }
 
 function generateGetWeatherPage(response) {
-  var i = Math.floor(Math.random() * response.artObjects.length);
-  var $newPic = response.artObjects[i].webImage.url;
-  var $newPicAlt = response.artObjects[i].title;
+  index = Math.floor(Math.random() * response.artObjects.length);
+  var $newPic = response.artObjects[index].webImage.url;
+  var $newPicAlt = response.artObjects[index].title;
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
@@ -152,10 +159,10 @@ function generateGetWeatherPage(response) {
   $newImage.className = 'main-pic';
   $imageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = response.artObjects[i].title;
+  $newImageTitle.textContent = response.artObjects[index].title;
   $imageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
+  $newImageArtist.textContent = response.artObjects[index].principalOrFirstMaker;
   $imageContainer.appendChild($newImageArtist);
 }
 
@@ -171,6 +178,8 @@ function goBack(event) {
   removeContainer($viewImageContainer);
   removeContainer($viewFullContainer);
   removeContainer($errorContainer);
+  removeContainer($imageContainer);
+  $footer.className = 'view hidden';
   $viewFullContainer.remove();
   $mainHeading.className = 'heading view';
   $weatherHeading.className = 'hidden';
@@ -223,7 +232,7 @@ function generateWeatherContent(response) {
     notFound.textContent = 'City not found, please try again.';
     $errorContainer.appendChild(notFound);
     $backButtonContainer.className = 'button-container row center';
-    $weatherSaveButton.remove();
+    // $weatherSaveButton.remove();
   } else {
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
@@ -287,16 +296,16 @@ function generateWeatherContent(response) {
     } else {
       $headerColor.className = 'header normal';
     }
-    $backButtonContainer.appendChild($weatherSaveButton);
-    $weatherSaveButton.className = 'weather-save-button';
-    $weatherSaveButton.textContent = 'Save Image';
-    $backButtonContainer.className = 'button-container row space';
+    // $backButtonContainer.appendChild($weatherSaveButton);
+    // $weatherSaveButton.className = 'weather-save-button';
+    // $weatherSaveButton.textContent = 'Save Image';
+    // $backButtonContainer.className = 'button-container row space';
 
   }
-  $weatherPage.appendChild($backButtonContainer);
-  $weatherBackButton.className = 'back-button';
-  $weatherBackButton.textContent = 'Back';
-  $backButtonContainer.prepend($weatherBackButton);
+  // $weatherPage.appendChild($backButtonContainer);
+  // $weatherBackButton.className = 'back-button';
+  // $weatherBackButton.textContent = 'Back';
+  // $backButtonContainer.prepend($weatherBackButton);
   $form.reset();
 }
 
@@ -346,7 +355,7 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
-  $weatherSaveButton.textContent = 'Saved!';
+  $saveButton.textContent = 'Saved!';
   window.setTimeout(function () {
     closePopUp();
   }, 2000);
@@ -354,5 +363,5 @@ function saveImageData(event) {
 }
 
 function closePopUp() {
-  $weatherSaveButton.textContent = 'Save Image';
+  $saveButton.textContent = 'Save Image';
 }

@@ -1,15 +1,26 @@
 header {
   position: relative;
   z-index: 2;
+  border-radius: 0 0 5% 5%;
+  background-color: hsla(215, 50%, 24%, 0.75);
+  height: 120px;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  z-index: 2;
+  border-radius: 5% 5% 0 0;
+  background-color: hsla(215, 50%, 24%, 0.75);
+  height: 85px;
 }
 
 .normal {
-  background-color: #1d3557;
   color: white;
 }
 
 .clouds {
-  background-color: gray;
+  background-color: rgba(128, 128, 128);
   color: white;
 }
 
@@ -71,7 +82,7 @@ input {
 }
 
 .space {
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .capitalize {
@@ -79,8 +90,6 @@ input {
 }
 
 .homepage {
-  /* padding: calc(100% / 3);
-  position: relative; */
   margin-top: 25%;
 }
 
@@ -88,12 +97,17 @@ input {
   text-align: center;
 }
 
+.content {
+  min-height: calc(100vh - 200px);
+}
+
 .heading-container {
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: baseline;
-  position: relative;
+
+  /* position: relative; */
   z-index: 2;
 }
 
@@ -230,7 +244,7 @@ input {
   color: rgb(241, 250, 238);
 }
 
-.weather-save-button {
+.save-button {
   width: 140px;
   height: 40px;
   padding: 5px 20px;
@@ -246,14 +260,14 @@ input {
 }
 
 .delete-button:hover,
-.weather-save-button:hover,
+.save-button:hover,
 .get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
 .delete-button:active,
-.weather-save-button:active,
+.save-button:active,
 .get-button:active,
 .go-button:active {
   background-color: rgb(0, 157, 255);
