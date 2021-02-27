@@ -62,6 +62,7 @@ function submitCity(event) {
 }
 function goToGet(event) {
   getArtData('snow');
+  $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
   $footer.className = 'view';
@@ -69,6 +70,7 @@ function goToGet(event) {
 
 }
 function goToView(event) {
+  $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
   $footer.className = 'view';
   $saveButton.className = 'hidden';
@@ -179,7 +181,7 @@ function goBack(event) {
   removeContainer($imageContainer);
   $footer.className = 'view hidden';
   $viewFullContainer.remove();
-  $mainHeading.className = 'heading view';
+  $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   homePageBackground();
   // changeBackground('snow');
@@ -277,21 +279,26 @@ function generateWeatherContent(response) {
     $conditionsContainer.appendChild(newCityHumidity);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
+      $footer.className = 'view clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
       $weatherContainer.style.color = 'white';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
+      $footer.className = 'view clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = 'rgb(255, 227, 70)';
     } else if (weatherCondition === 'Snow') {
+      $footer.className = 'view snow';
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
       $weatherContainer.style.color = 'rgb(156, 156, 253)';
     } else if (weatherCondition === 'Rain') {
+      $footer.className = 'view rain';
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
       $weatherContainer.style.color = 'rgba(125, 125, 255, 0.986)';
     } else {
+      $footer.className = 'view normal';
       $headerColor.className = 'header normal';
     }
     // $backButtonContainer.appendChild($weatherSaveButton);

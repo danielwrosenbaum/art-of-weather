@@ -3,7 +3,7 @@ header {
   z-index: 2;
   border-radius: 0 0 5% 5%;
   background-color: hsla(215, 50%, 24%, 0.75);
-  height: 85px;
+  height: 70px;
 }
 
 footer {
@@ -12,7 +12,7 @@ footer {
   z-index: 2;
   border-radius: 5% 5% 0 0;
   background-color: hsla(215, 50%, 24%, 0.75);
-  height: 85px;
+  height: 70px;
 }
 
 .normal {
@@ -89,16 +89,12 @@ input {
   text-transform: capitalize;
 }
 
-.homepage {
-  margin-top: 25%;
-}
-
 .viewpage {
   text-align: center;
 }
 
 .content {
-  min-height: calc(100vh - 170px);
+  min-height: calc(100vh - 140px);
 }
 
 .heading-container {
@@ -171,18 +167,6 @@ input {
   text-shadow: 2px 2px 4px gray;
 }
 
-.background-pic {
-  position: fixed;
-  left: -50%;
-  top: 0;
-  min-height: 100vh;
-  min-width: 1024px;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  opacity: 0.4;
-}
-
 .main-pic {
   border-radius: 5%;
   max-height: 100%;
@@ -198,6 +182,7 @@ input {
   text-align: center;
   display: flex;
   justify-content: space-evenly;
+  align-items: baseline;
 }
 
 .go-button {
@@ -232,8 +217,8 @@ input {
   font-size: large;
   background-color: rgba(230, 57, 70, 0.65);
   color: rgb(241, 250, 238);
-  margin-top: 25px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .delete-button {
@@ -251,8 +236,8 @@ input {
   font-size: large;
   background-color: rgba(69, 123, 157, 0.65);
   color: rgb(241, 250, 238);
-  margin-top: 25px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .view-back-button {
