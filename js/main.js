@@ -37,7 +37,6 @@ var idNum;
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $viewBackButton.addEventListener('click', goBack);
-$goButton.addEventListener('click', goToWeather);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $weatherBackButton.addEventListener('click', goBack);
@@ -56,6 +55,7 @@ function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
   getWeather(cityWeather);
+  goToWeather();
 }
 function goToGet(event) {
   getArtData('snow');
