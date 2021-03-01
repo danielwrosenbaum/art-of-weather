@@ -214,12 +214,10 @@ function goToWeather(event) {
 
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
+  xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-
     generateWeatherContent(xhr.response);
-    // console.log(xhr.response);
   });
   xhr.send();
 }
@@ -232,7 +230,6 @@ function generateWeatherContent(response) {
     notFound.textContent = 'City not found, please try again.';
     $errorContainer.appendChild(notFound);
     $backButtonContainer.className = 'button-container row center';
-    // $weatherSaveButton.remove();
   } else {
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
@@ -301,16 +298,8 @@ function generateWeatherContent(response) {
       $footer.className = 'view normal';
       $headerColor.className = 'header normal';
     }
-    // $backButtonContainer.appendChild($weatherSaveButton);
-    // $weatherSaveButton.className = 'weather-save-button';
-    // $weatherSaveButton.textContent = 'Save Image';
-    // $backButtonContainer.className = 'button-container row space';
-
   }
-  // $weatherPage.appendChild($backButtonContainer);
-  // $weatherBackButton.className = 'back-button';
-  // $weatherBackButton.textContent = 'Back';
-  // $backButtonContainer.prepend($weatherBackButton);
+
   $form.reset();
 }
 
