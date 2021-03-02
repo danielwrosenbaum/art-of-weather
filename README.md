@@ -13,3 +13,12 @@ A weather app that allows a user to look up the current weather in a city while 
 3. User will be able to save the images generated from Rijksmuseum to local storage.
 4. User will be given the option to either get new weather conditions or view saved images on the app's homescreen.
 5. User will be able to delete any image from the saved collection.
+
+## Planned Additions
+
+## Screenshots
+
+![Screen Shot 2021-03-02 at 3 17 21 PM](https://user-images.githubusercontent.com/74999873/109728354-de399e80-7b6a-11eb-9859-9dba35d91a9a.png)
+![Screen Shot 2021-03-02 at 3 18 18 PM](https://user-images.githubusercontent.com/74999873/109728366-e09bf880-7b6a-11eb-96be-dcc371e6415f.png)
+![Screen Shot 2021-03-02 at 3 18 29 PM](https://user-images.githubusercontent.com/74999873/109728368-e2fe5280-7b6a-11eb-9eed-e14844318444.png)
+![Screen Shot 2021-03-02 at 3 20 16 PM](https://user-images.githubusercontent.com/74999873/109728369-e4c81600-7b6a-11eb-8e12-1e57f3e7c155.png)
