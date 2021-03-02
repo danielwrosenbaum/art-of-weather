@@ -109,6 +109,7 @@ function viewImage(event) {
   $viewImageContainer.className = 'view-container hidden';
   $viewPageHeader.className = 'viewpage-header hidden';
   $mainHeading.className = 'hidden';
+  $headerColor.className = 'hidden';
 
 }
 function changeBackground(weather) {
