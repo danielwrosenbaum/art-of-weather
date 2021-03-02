@@ -13,6 +13,7 @@ var $form = document.querySelector('.city-form');
 var $headerColor = document.querySelector('.header');
 var $footer = document.querySelector('footer');
 var $saveButton = document.querySelector('.save-button');
+var $loader = document.querySelector('.loader');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -114,10 +115,12 @@ function viewImage(event) {
 }
 function changeBackground(weather) {
   var xhr4 = new XMLHttpRequest();
+  $loader.className = 'loader';
   xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr4.responseType = 'json';
   xhr4.addEventListener('load', function () {
     generateRandomBackground(xhr4.response);
+    $loader.className = 'loader hidden';
   });
   xhr4.send();
 }
@@ -135,10 +138,12 @@ function generateRandomBackground(response) {
 
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
+  $loader.className = 'loader';
   xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
     generateGetWeatherPage(xhr3.response);
+    $loader.className = 'loader hidden';
   });
   xhr3.send();
 }
@@ -212,10 +217,12 @@ function goToWeather(event) {
 
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
+  $loader.className = 'loader';
   xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     generateWeatherContent(xhr.response);
+    $loader.className = 'loader hidden';
   });
   xhr.send();
 }
@@ -306,10 +313,12 @@ function getArtWeather(weather) {
     weather = 'Sun';
   }
   var xhr2 = new XMLHttpRequest();
+  $loader.className = 'loader';
   xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
   xhr2.responseType = 'json';
   xhr2.addEventListener('load', function () {
     generateWeatherPicture(xhr2.response);
+    $loader.className = 'loader hidden';
   });
   xhr2.send();
 }

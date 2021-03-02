@@ -287,3 +287,12 @@ button:hover,
 .view-image-pic:hover {
   box-shadow: 7px 7px 20px rgb(78, 57, 57);
 }
+
+.loader {
+  z-index: 3;
+  width: 4rem;
+  height: 4rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
