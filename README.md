@@ -4,7 +4,7 @@ A weather app that allows a user to look up the current weather in a city while 
 
 ### Link
 
-[My app] (https://danielwrosenbaum.github.io/ajax-project/)
+[link] (https://danielwrosenbaum.github.io/ajax-project/)
 
 ## Features:
 
