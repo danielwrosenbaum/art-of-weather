@@ -20,6 +20,13 @@ A weather app that allows a user to look up the current weather in a city while 
 * Animate weather icons that generate along with weather conditions.
 * User can send themselves links to the images via email. 
 
+## Things I Learned
+
+* Ability to grab data from multiple API's and use data from one API to generate content from another. 
+* How to probably save and delete from localstorage at the same time as you save and delete from webpage.
+* How to adjust media settings for mobile and screen without limiting functionality for either.
+* How to add a loading spinner that appears whenever an API request is loading.
+
 ## Screenshots
 
 ![Screen Shot 2021-03-02 at 3 17 21 PM](https://user-images.githubusercontent.com/74999873/109728354-de399e80-7b6a-11eb-9859-9dba35d91a9a.png)
