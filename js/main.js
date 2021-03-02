@@ -217,12 +217,12 @@ function goToWeather(event) {
 
 function getWeather(cityName) {
   var xhr = new XMLHttpRequest();
-  $loader.className = 'loader';
+  // $loader.className = 'loader';
   xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=8e56c099331856fb966227282999fa5c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     generateWeatherContent(xhr.response);
-    $loader.className = 'loader hidden';
+    // $loader.className = 'loader hidden';
   });
   xhr.send();
 }

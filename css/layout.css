@@ -1,3 +1,6 @@
+body {
+  overflow: auto;
+}
 
 .hidden {
   display: none !important;
@@ -20,7 +23,8 @@
 .image-container {
   max-width: 575px;
   margin: 0 auto;
-  padding: 0 1rem;
+
+  /* padding: 0 1rem; */
   height: 100%;
 }
 
