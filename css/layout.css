@@ -1,9 +1,6 @@
+
 .hidden {
   display: none !important;
-}
-
-.homepage-buttons {
-  margin: 60% auto;
 }
 
 .background-pic {
@@ -11,7 +8,7 @@
   left: -50%;
   top: 0;
   min-height: 100vh;
-  min-width: 1024px;
+  min-width: 900px;
   height: 100%;
   width: 100%;
   z-index: 1;
@@ -40,9 +37,5 @@
     max-width: 900px;
     height: 100%;
     margin: 0 auto;
-  }
-
-  .homepage-buttons {
-    margin: 25% auto;
   }
 }
