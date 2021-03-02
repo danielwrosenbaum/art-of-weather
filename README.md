@@ -1,10 +1,10 @@
-# ajax-project
+# Weather as Art
 
 A weather app that allows a user to look up the current weather in a city while viewing an historic painting that has a similar vibe and setting.
 
 ### Link
 
-[My App](https://danielwrosenbaum.github.io/ajax-project/)
+[Weather as Art](https://danielwrosenbaum.github.io/ajax-project/)
 
 ## Features:
 
