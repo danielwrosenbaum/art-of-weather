@@ -14,6 +14,7 @@ var $headerColor = document.querySelector('.header');
 var $footer = document.querySelector('footer');
 var $saveButton = document.querySelector('.save-button');
 var $loader = document.querySelector('.loader');
+var $mainContainer = document.querySelector('.main-container');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -59,6 +60,7 @@ function submitCity(event) {
   goToWeather();
 }
 function goToGet(event) {
+  $mainContainer.className = 'main-container content-wrap';
   getArtData('snow');
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
@@ -68,6 +70,7 @@ function goToGet(event) {
 
 }
 function goToView(event) {
+  $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
   $footer.className = 'view';
@@ -170,6 +173,7 @@ function generateGetWeatherPage(response) {
 }
 
 function goBack(event) {
+  $mainContainer.className = 'main-container';
   $getWeatherPage.className = 'get-weather hidden';
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
