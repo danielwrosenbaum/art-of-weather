@@ -45,6 +45,10 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+h1 {
+  margin-block-end: auto;
+}
+
 h4 {
   margin: 5px 0 0 0;
 }
