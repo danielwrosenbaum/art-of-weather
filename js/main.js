@@ -143,7 +143,7 @@ function getArtData(weather) {
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
     generateGetWeatherPage(xhr3.response);
-    $loader.className = 'loader hidden';
+
   });
   xhr3.send();
 }
@@ -167,6 +167,7 @@ function generateGetWeatherPage(response) {
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = response.artObjects[index].principalOrFirstMaker;
   $imageContainer.appendChild($newImageArtist);
+  $loader.className = 'loader hidden';
 }
 
 function goBack(event) {
@@ -316,12 +317,13 @@ function getArtWeather(weather) {
   xhr2.responseType = 'json';
   xhr2.addEventListener('load', function () {
     generateWeatherPicture(xhr2.response);
-    $loader.className = 'loader hidden';
+
   });
   xhr2.send();
 }
 
 function generateWeatherPicture(response) {
+
   var i = Math.floor(Math.random() * response.artObjects.length);
   $newPic = response.artObjects[i].webImage.url;
   $newPicTitle = response.artObjects[i].title;
@@ -343,6 +345,7 @@ function generateWeatherPicture(response) {
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = $newArtistName;
   $weatherImageContainer.appendChild($newImageArtist);
+  $loader.className = 'loader hidden';
 }
 
 function saveImageData(event) {
