@@ -40,8 +40,6 @@ $backButton.addEventListener('click', goBack);
 $viewBackButton.addEventListener('click', goBack);
 $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
-// $weatherBackButton.addEventListener('click', goBack);
-// $weatherSaveButton.addEventListener('click', saveImageData);
 $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteFromStorage);
@@ -52,7 +50,6 @@ function homePageBackground() {
   $backgroundPic.prepend($randomBackground);
 }
 
-// getArtData('snow');
 function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
@@ -173,6 +170,7 @@ function goBack(event) {
   $weatherPage.className = 'weatherpage hidden';
   $headerColor.className = 'header normal';
   $viewPageHeader.className = 'hidden';
+  $mainHeading.className = 'heading view';
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
   removeContainer($viewImageContainer);
@@ -184,7 +182,6 @@ function goBack(event) {
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   homePageBackground();
-  // changeBackground('snow');
 }
 
 function removeContainer(parent) {

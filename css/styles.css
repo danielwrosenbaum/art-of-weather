@@ -3,16 +3,18 @@ header {
   z-index: 2;
   border-radius: 0 0 5% 5%;
   background-color: hsla(215, 50%, 24%, 0.75);
-  height: 70px;
+  height: 5rem;
+  width: 100%;
 }
 
 footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
   z-index: 2;
   border-radius: 5% 5% 0 0;
   background-color: hsla(215, 50%, 24%, 0.75);
-  height: 70px;
+  height: 5rem;
+  width: 100%;
 }
 
 .normal {
@@ -94,7 +96,12 @@ input {
 }
 
 .content {
-  min-height: calc(100vh - 140px);
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 5rem;
 }
 
 .heading-container {
@@ -146,6 +153,7 @@ input {
   height: 45%;
   box-shadow: 2px 2px 5px gray;
   border-radius: 5px;
+  max-height: 50%;
 }
 
 .view-image-pic:active {
