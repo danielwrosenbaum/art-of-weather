@@ -16,6 +16,10 @@ A weather app that allows a user to look up the current weather in a city while 
 
 ## Planned Additions
 
+* User can see live radar map of current weather in city.
+* Animate weather icons that generate along with weather conditions.
+* User can send themselves links to the images via email. 
+
 ## Screenshots
 
 ![Screen Shot 2021-03-02 at 3 17 21 PM](https://user-images.githubusercontent.com/74999873/109728354-de399e80-7b6a-11eb-9859-9dba35d91a9a.png)
