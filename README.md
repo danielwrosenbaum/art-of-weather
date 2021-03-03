@@ -4,7 +4,7 @@ A weather app that allows the user to look up the current weather in a city whil
 
 ### Link
 
-[Weather as Art](https://danielwrosenbaum.github.io/ajax-project/)
+[Weather as Art](https://danielwrosenbaum.github.io/art-of-weather/)
 
 ## Features:
 
