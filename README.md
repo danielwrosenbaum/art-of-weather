@@ -1,6 +1,6 @@
-# Weather as Art
+# art-of-weather
 
-A weather app that allows a user to look up the current weather in a city while viewing an historic painting that has a similar vibe and setting.
+A weather app that allows the user to look up the current weather in a city while viewing an historic painting that has a similar vibe and setting.
 
 ### Link
 
@@ -18,11 +18,11 @@ A weather app that allows a user to look up the current weather in a city while 
 
 * User can see live radar map of current weather in city.
 * Animate weather icons that generate along with weather conditions.
-* User can send themselves links to the images via email. 
+* User can send themselves links to the images via email.
 
 ## Things I Learned
 
-* Ability to grab data from multiple API's and use data from one API to generate content from another. 
+* Ability to grab data from multiple API's and use data from one API to generate content from another.
 * How to probably save and delete from localstorage at the same time as you save and delete from webpage.
 * How to adjust media settings for mobile and screen without limiting functionality for either.
 * How to add a loading spinner that appears whenever an API request is loading.
