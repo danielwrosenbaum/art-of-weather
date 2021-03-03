@@ -51,6 +51,7 @@ function homePageBackground() {
   $backgroundPic.prepend($randomBackground);
 }
 
+// Submit form to get weather by city name //
 function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
@@ -59,6 +60,7 @@ function submitCity(event) {
   goToWeather();
 }
 
+// Go to the Get Weather Page //
 function goToGet(event) {
   $mainContainer.className = 'main-container content-wrap';
   getArtData('snow');
@@ -67,8 +69,9 @@ function goToGet(event) {
   $homePage.className = 'homepage hidden';
   $footer.className = 'view';
   $saveButton.className = 'hidden';
-
 }
+
+// Go to the View Saved Images Page //
 function goToView(event) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
@@ -139,6 +142,7 @@ function generateRandomBackground(response) {
   $randomBackground.setAttribute('alt', $newPicAlt);
 }
 
+// Gets an image for the Get Weather Page //
 function getArtData(weather) {
   var xhr3 = new XMLHttpRequest();
   $loader.className = 'loader';
@@ -308,6 +312,7 @@ function generateWeatherContent(response) {
   $form.reset();
 }
 
+// Gets Image based on weather conditions in specified city //
 function getArtWeather(weather) {
   if (weather === 'Clear') {
     weather = 'Sun';
