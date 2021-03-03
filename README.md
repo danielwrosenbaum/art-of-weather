@@ -12,7 +12,7 @@ A weather app that allows the user to look up the current weather in a city whil
 
 ### Link
 
-[art-of-weather](https://github.com/danielwrosenbaum/art-of-weather)
+[art-of-weather](https://danielwrosenbaum.github.io/art-of-weather/)
 
 ## Features:
 
