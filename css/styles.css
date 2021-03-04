@@ -159,8 +159,8 @@ input {
 }
 
 .view-one {
-  position: fixed;
-  margin: 1rem;
+  position: absolute;
+  margin: 2rem 1rem;
   padding-bottom: 5%;
   box-shadow: 7px 7px 15px rgb(78, 57, 57);
   text-shadow: 2px 2px 4px gray;
