@@ -105,6 +105,12 @@ input {
   padding-bottom: 5rem;
 }
 
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading-container {
   display: flex;
   justify-content: center;

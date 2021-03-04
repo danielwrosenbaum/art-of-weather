@@ -15,6 +15,7 @@ var $goButton = document.querySelector('.go-button');
 var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
 var $saveButton = document.querySelector('.save-button');
+var $searchCity = document.querySelector('.search-city');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -56,7 +57,6 @@ function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
   getWeather(cityWeather);
-  $saveButton.className = 'save-button';
   goToWeather();
 }
 
@@ -234,13 +234,15 @@ function getWeather(cityName) {
 
 function generateWeatherContent(response) {
   if (response.cod === '404') {
-    $weatherPage.prepend($errorContainer);
-    var notFound = document.createElement('h1');
-    notFound.className = 'row center';
-    notFound.textContent = 'City not found, please try again.';
-    $errorContainer.appendChild(notFound);
+    $saveButton.className = 'hidden';
+    $getWeatherPage.className = 'get-weather view';
+    $searchCity.textContent = 'City not found. Please try again.';
     $backButtonContainer.className = 'button-container row center';
+    window.setTimeout(function () {
+      errorMessage();
+    }, 2500);
   } else {
+    $saveButton.className = 'save-button';
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
     var weatherHumidity = 'Humidity:' + ' ' + response.main.humidity + '%';
@@ -369,4 +371,9 @@ function saveImageData(event) {
 
 function closePopUp() {
   $saveButton.textContent = 'Save Image';
+}
+
+function errorMessage() {
+
+  $searchCity.textContent = 'Search by City';
 }
