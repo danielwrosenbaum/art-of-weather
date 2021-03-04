@@ -235,6 +235,10 @@ input {
   margin-top: 15px;
 }
 
+button:focus {
+  outline: none;
+}
+
 .delete-button:hover,
 .save-button:hover,
 .get-button:hover,
