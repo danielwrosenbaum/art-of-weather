@@ -172,12 +172,14 @@ input {
 }
 
 .view-one {
+  position: fixed;
   margin: 10% 2.5% 10% 2.5%;
   padding-bottom: 5%;
   box-shadow: 7px 7px 15px rgb(78, 57, 57);
   text-shadow: 2px 2px 4px gray;
   text-align: center;
   border-radius: 0.5rem;
+  z-index: 4;
 }
 
 .main-pic {
@@ -336,4 +338,14 @@ button:hover,
 
 .big-heart {
   color: rgb(236, 47, 63);
+}
+
+.overlay {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(226, 226, 226, 0.75);
+  z-index: 3;
 }

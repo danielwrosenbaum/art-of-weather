@@ -34,6 +34,8 @@ var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
 var $deleteButton = document.createElement('button');
 var $bigHeart = document.createElement('i');
+var $overlay = document.createElement('div');
+var $viewFullImage = document.createElement('img');
 
 var newPic;
 var newPicTitle;
@@ -51,6 +53,7 @@ $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteImage);
 $randomButton.addEventListener('click', getRandomImage);
+$overlay.addEventListener('click', goToView);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -80,6 +83,9 @@ function goToGet(event) {
 
 // Go to the View Saved Images Page //
 function goToView(event) {
+  // $viewImageContainer.addEventListener('click', viewImage);
+  $overlay.className = 'hidden';
+  removeContainer($viewFullContainer);
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
@@ -107,22 +113,28 @@ function goToView(event) {
 
 function viewImage(event) {
   var closestId = event.target.closest('img');
-  idNum = closestId.getAttribute('data-id');
-  var paintingInfo = closestId.getAttribute('alt');
-  $viewPage.prepend($viewFullContainer);
-  $viewFullContainer.className = 'view-one';
-  var $viewFullImage = document.createElement('img');
-  $viewFullImage = closestId;
-  $viewFullImage.className = 'view-full';
-  $viewFullContainer.append($viewFullImage);
-  var $paintingInfo = document.createElement('h3');
-  $paintingInfo.textContent = paintingInfo;
-  $viewFullContainer.append($paintingInfo);
-  $viewFullContainer.append($deleteButton);
-  $deleteButton.className = 'delete-button';
-  $deleteButton.textContent = 'Delete Image';
-  $viewImageContainer.className = 'view-container hidden';
-  $viewPageHeader.className = 'viewpage-header hidden';
+  if (closestId !== null) {
+    idNum = closestId.getAttribute('data-id');
+    var paintingInfo = closestId.getAttribute('alt');
+    $viewPage.prepend($viewFullContainer);
+    $viewFullContainer.className = 'view-one';
+    var imageUrl = closestId.getAttribute('src');
+    $viewFullImage.setAttribute('src', imageUrl);
+    $viewFullImage.className = 'view-full';
+    $viewFullContainer.append($viewFullImage);
+    var $paintingInfo = document.createElement('h3');
+    $paintingInfo.textContent = paintingInfo;
+    $viewFullContainer.append($paintingInfo);
+    $viewFullContainer.append($deleteButton);
+    $deleteButton.className = 'delete-button';
+    $deleteButton.textContent = 'Delete Image';
+    $viewImageContainer.prepend($overlay);
+    $overlay.className = 'overlay';
+  }
+  // $viewImageContainer.removeEventListener('click', viewImage);
+
+  // $viewImageContainer.className = 'view-container hidden';
+  // $viewPageHeader.className = 'viewpage-header hidden';
   // $mainHeading.className = 'hidden';
   // $headerColor.className = 'hidden';
 }
@@ -229,6 +241,7 @@ function goBack(event) {
   $viewFullContainer.remove();
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
+  $overlay.className = 'hidden';
   homePageBackground();
 }
 
