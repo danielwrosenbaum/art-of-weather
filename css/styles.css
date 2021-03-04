@@ -5,7 +5,6 @@ body {
 header {
   position: relative;
   z-index: 2;
-  border-radius: 0 0 5% 5%;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
@@ -15,7 +14,6 @@ footer {
   position: absolute;
   bottom: 0;
   z-index: 2;
-  border-radius: 5% 5% 0 0;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
