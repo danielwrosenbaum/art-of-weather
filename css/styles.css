@@ -72,6 +72,14 @@ input {
   width: 100%;
 }
 
+.column-most {
+  width: 75%;
+}
+
+.column-some {
+  width: 25%;
+}
+
 .column-half {
   width: 50%;
 }
@@ -141,6 +149,7 @@ input {
 
 .image-container {
   margin: 5%;
+  position: relative;
 }
 
 .view-image-pic {
@@ -227,6 +236,14 @@ input {
   color: rgb(241, 250, 238);
 }
 
+.view-saved {
+  position: absolute;
+  top: 3rem;
+  right: 0.75rem;
+  font-size: large;
+  color: rgb(241, 250, 238);
+}
+
 .delete-button {
   width: 100px;
   height: 40px;
@@ -235,11 +252,10 @@ input {
 }
 
 .save-button {
-  position: absolute;
-  top: 3rem;
-  right: 0.75rem;
+  margin: 5%;
+  float: right;
   font-size: large;
-  color: rgb(241, 250, 238);
+  color: black;
 }
 
 button:focus {
@@ -279,10 +295,12 @@ button:focus {
   transform: translateY(4px);
 }
 
+.view-saved:hover,
 .back-button:hover {
   color: #7edde2;
 }
 
+.view-saved:active,
 .back-button:active {
   transform: translateY(4px);
 }
