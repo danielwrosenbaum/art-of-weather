@@ -121,15 +121,15 @@ function viewImage(event) {
 }
 
 function changeBackground(weather) {
-  var xhr4 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr4.responseType = 'json';
-  xhr4.addEventListener('load', function () {
-    generateRandomBackground(xhr4.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateRandomBackground(xhr.response);
     $loader.className = 'loader hidden';
   });
-  xhr4.send();
+  xhr.send();
 }
 
 function generateRandomBackground(response) {
@@ -144,14 +144,14 @@ function generateRandomBackground(response) {
 
 // Gets an image for the Get Weather Page //
 function getArtData(weather) {
-  var xhr3 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr3.responseType = 'json';
-  xhr3.addEventListener('load', function () {
-    generateGetWeatherPage(xhr3.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateGetWeatherPage(xhr.response);
   });
-  xhr3.send();
+  xhr.send();
 }
 
 function generateGetWeatherPage(response) {
@@ -319,14 +319,14 @@ function getArtWeather(weather) {
   if (weather === 'Clear') {
     weather = 'Sun';
   }
-  var xhr2 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr2.responseType = 'json';
-  xhr2.addEventListener('load', function () {
-    generateWeatherPicture(xhr2.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateWeatherPicture(xhr.response);
   });
-  xhr2.send();
+  xhr.send();
 }
 
 function generateWeatherPicture(response) {

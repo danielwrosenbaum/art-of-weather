@@ -52,22 +52,22 @@ input {
 }
 
 .clouds {
-  background-color: #687179;
+  background-color: #687179d8;
   color: #aebdca;
 }
 
 .clear {
-  background-color: #0536cb;
+  background-color: #1f57ffd8;
   color: #fac934;
 }
 
 .snow {
-  background-color: #fffafa;
+  background-color: #fffafad8;
   color: #b7c7d5;
 }
 
 .rain {
-  background-color: #224b8b;
+  background-color: #224a8bd8;
   color: #b2ddff;
 }
 
@@ -125,14 +125,14 @@ input {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
-  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.75);
 }
 
 .search-container {
   margin-top: 40%;
   margin-bottom: 40%;
   text-align: center;
-  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.6);
 }
 
 .view-container {
