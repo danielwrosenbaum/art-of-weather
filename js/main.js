@@ -288,22 +288,22 @@ function generateWeatherContent(response) {
       $headerColor.className = 'header clouds';
       $footer.className = 'view clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
-      $weatherContainer.style.color = 'white';
+      $weatherContainer.style.color = '#687179';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $footer.className = 'view clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
-      $weatherContainer.style.color = 'rgb(255, 227, 70)';
+      $weatherContainer.style.color = '#FAC934';
     } else if (weatherCondition === 'Snow') {
       $footer.className = 'view snow';
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
-      $weatherContainer.style.color = 'rgb(156, 156, 253)';
+      $weatherContainer.style.color = '#FFFAFA';
     } else if (weatherCondition === 'Rain') {
       $footer.className = 'view rain';
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
-      $weatherContainer.style.color = 'rgba(125, 125, 255, 0.986)';
+      $weatherContainer.style.color = '#224B8B';
     } else {
       $footer.className = 'view normal';
       $headerColor.className = 'header normal';
