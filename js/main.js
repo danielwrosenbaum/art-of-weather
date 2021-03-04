@@ -1,5 +1,6 @@
 var $backgroundPic = document.querySelector('.background-pic');
 var $loader = document.querySelector('.loader');
+var $loading = document.querySelector('.loading');
 var $getWeatherPage = document.querySelector('.get-weather');
 var $headingContainer = document.querySelector('.heading-container');
 var $headerColor = document.querySelector('.header');
@@ -8,7 +9,6 @@ var $mainContainer = document.querySelector('.main-container');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
-var $footer = document.querySelector('footer');
 var $backButton = document.querySelector('.back-button');
 var $form = document.querySelector('.city-form');
 var $goButton = document.querySelector('.go-button');
@@ -18,6 +18,7 @@ var $saveButton = document.querySelector('.save-button');
 var $searchCity = document.querySelector('.search-city');
 var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
+var $heart = document.querySelector('.heart');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -31,6 +32,9 @@ var $weatherImageContainer = document.createElement('div');
 var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
 var $deleteButton = document.createElement('button');
+var $bigHeart = document.createElement('i');
+var $overlay = document.createElement('div');
+var $viewFullImage = document.createElement('img');
 
 var newPic;
 var newPicTitle;
@@ -48,6 +52,7 @@ $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteImage);
 $randomButton.addEventListener('click', getRandomImage);
+$overlay.addEventListener('click', backToView);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -71,7 +76,6 @@ function goToGet(event) {
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
-  $footer.className = 'view';
   $saveButton.className = 'hidden';
 }
 
@@ -80,7 +84,6 @@ function goToView(event) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  $footer.className = 'view';
   $saveButton.className = 'hidden';
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
@@ -102,26 +105,30 @@ function goToView(event) {
   }
 }
 
+function backToView(event) {
+  removeContainer($viewFullContainer);
+  $overlay.className = 'hidden';
+}
 function viewImage(event) {
   var closestId = event.target.closest('img');
-  idNum = closestId.getAttribute('data-id');
-  var paintingInfo = closestId.getAttribute('alt');
-  $viewPage.prepend($viewFullContainer);
-  $viewFullContainer.className = 'view-one';
-  var $viewFullImage = document.createElement('img');
-  $viewFullImage = closestId;
-  $viewFullImage.className = 'view-full';
-  $viewFullContainer.append($viewFullImage);
-  var $paintingInfo = document.createElement('h3');
-  $paintingInfo.textContent = paintingInfo;
-  $viewFullContainer.append($paintingInfo);
-  $viewFullContainer.append($deleteButton);
-  $deleteButton.className = 'delete-button';
-  $deleteButton.textContent = 'Delete Image';
-  $viewImageContainer.className = 'view-container hidden';
-  $viewPageHeader.className = 'viewpage-header hidden';
-  $mainHeading.className = 'hidden';
-  $headerColor.className = 'hidden';
+  if (closestId !== null) {
+    idNum = closestId.getAttribute('data-id');
+    var paintingInfo = closestId.getAttribute('alt');
+    $viewPage.prepend($viewFullContainer);
+    $viewFullContainer.className = 'view-one';
+    var imageUrl = closestId.getAttribute('src');
+    $viewFullImage.setAttribute('src', imageUrl);
+    $viewFullImage.className = 'view-full';
+    $viewFullContainer.append($viewFullImage);
+    var $paintingInfo = document.createElement('h3');
+    $paintingInfo.textContent = paintingInfo;
+    $viewFullContainer.append($paintingInfo);
+    $viewFullContainer.append($deleteButton);
+    $deleteButton.className = 'delete-button';
+    $deleteButton.textContent = 'Delete Image';
+    $viewImageContainer.prepend($overlay);
+    $overlay.className = 'overlay';
+  }
 }
 
 function changeBackground(weather) {
@@ -189,7 +196,6 @@ function generateRandomImage(response) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
   $homePage.className = 'homepage hidden';
-  $footer.className = 'view';
   $saveButton.className = 'save-button';
   $randomPage.className = 'randompage';
   $imageContainer.className = 'image-container';
@@ -222,10 +228,10 @@ function goBack(event) {
   removeContainer($viewFullContainer);
   removeContainer($errorContainer);
   removeContainer($imageContainer);
-  $footer.className = 'view hidden';
   $viewFullContainer.remove();
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
+  $overlay.className = 'hidden';
   homePageBackground();
 }
 
@@ -319,28 +325,23 @@ function generateWeatherContent(response) {
     $conditionsContainer.appendChild($newCityHumidity);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
-      $footer.className = 'view clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
       $weatherContainer.style.color = '#687179';
-      $weatherContainer.style.textShadow = '2px 3px 5px #aebdca';
+      $weatherContainer.style.textShadow = '2px 3px 5px gray';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
-      $footer.className = 'view clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = '#FAC934';
+      $weatherContainer.style.textShadow = '2px 3px 5px black';
     } else if (weatherCondition === 'Snow') {
-      $footer.className = 'view snow';
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
       $weatherContainer.style.color = '#FFFAFA';
-
     } else if (weatherCondition === 'Rain') {
-      $footer.className = 'view rain';
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
       $weatherContainer.style.color = '#224B8B';
     } else {
-      $footer.className = 'view normal';
       $headerColor.className = 'header normal';
     }
   }
@@ -396,16 +397,26 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
-  $saveButton.textContent = 'Saved!';
+  $heart.className = 'fas fa-heart heart';
+  $heart.style.color = 'rgb(236, 47, 63)';
+  $loader.className = 'loader';
+  $loader.append($bigHeart);
+  $bigHeart.className = 'big-heart fas fa-heart fa-6x';
+  $loading.className = 'loading hidden';
   window.setTimeout(function () {
     closePopUp();
-  }, 2000);
+  }, 1500);
 }
 
 function closePopUp() {
-  $saveButton.textContent = 'Save Image';
+  $heart.className = 'far fa-heart heart';
+  $heart.style.color = 'rgb(241, 250, 238)';
+  $loader.className = 'loader hidden';
+  $bigHeart.className = 'hidden';
+  $loading.className = 'loading';
 }
 
 function errorMessage() {
   $searchCity.textContent = 'Search by City';
+
 }
