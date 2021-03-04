@@ -161,18 +161,18 @@ function generateGetWeatherPage(response) {
   $randomBackground.setAttribute('src', $newPic);
   $randomBackground.setAttribute('alt', $newPicAlt);
   $backgroundPic.prepend($randomBackground);
-  $imageContainer.className = 'image-container';
-  $getWeatherPage.prepend($imageContainer);
-  $newImage.setAttribute('src', $newPic);
-  $newImage.setAttribute('alt', $newPicAlt);
-  $newImage.className = 'main-pic';
-  $imageContainer.prepend($newImage);
-  var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = response.artObjects[index].title;
-  $imageContainer.appendChild($newImageTitle);
-  var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = response.artObjects[index].principalOrFirstMaker;
-  $imageContainer.appendChild($newImageArtist);
+  // $imageContainer.className = 'image-container';
+  // $getWeatherPage.prepend($imageContainer);
+  // $newImage.setAttribute('src', $newPic);
+  // $newImage.setAttribute('alt', $newPicAlt);
+  // $newImage.className = 'main-pic';
+  // $imageContainer.prepend($newImage);
+  // var $newImageTitle = document.createElement('h4');
+  // $newImageTitle.textContent = response.artObjects[index].title;
+  // $imageContainer.appendChild($newImageTitle);
+  // var $newImageArtist = document.createElement('div');
+  // $newImageArtist.textContent = response.artObjects[index].principalOrFirstMaker;
+  // $imageContainer.appendChild($newImageArtist);
   $loader.className = 'loader hidden';
 }
 
