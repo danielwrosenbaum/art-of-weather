@@ -9,7 +9,6 @@ var $mainContainer = document.querySelector('.main-container');
 var $homePage = document.querySelector('.homepage');
 var $viewPage = document.querySelector('.viewpage');
 var $weatherPage = document.querySelector('.weatherpage');
-var $footer = document.querySelector('footer');
 var $backButton = document.querySelector('.back-button');
 var $form = document.querySelector('.city-form');
 var $goButton = document.querySelector('.go-button');
@@ -53,7 +52,7 @@ $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteImage);
 $randomButton.addEventListener('click', getRandomImage);
-$overlay.addEventListener('click', goToView);
+$overlay.addEventListener('click', backToView);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -77,19 +76,14 @@ function goToGet(event) {
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
-  // $footer.className = 'view';
   $saveButton.className = 'hidden';
 }
 
 // Go to the View Saved Images Page //
 function goToView(event) {
-  // $viewImageContainer.addEventListener('click', viewImage);
-  $overlay.className = 'hidden';
-  removeContainer($viewFullContainer);
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  // $footer.className = 'view';
   $saveButton.className = 'hidden';
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
@@ -111,6 +105,10 @@ function goToView(event) {
   }
 }
 
+function backToView(event) {
+  removeContainer($viewFullContainer);
+  $overlay.className = 'hidden';
+}
 function viewImage(event) {
   var closestId = event.target.closest('img');
   if (closestId !== null) {
@@ -131,12 +129,6 @@ function viewImage(event) {
     $viewImageContainer.prepend($overlay);
     $overlay.className = 'overlay';
   }
-  // $viewImageContainer.removeEventListener('click', viewImage);
-
-  // $viewImageContainer.className = 'view-container hidden';
-  // $viewPageHeader.className = 'viewpage-header hidden';
-  // $mainHeading.className = 'hidden';
-  // $headerColor.className = 'hidden';
 }
 
 function changeBackground(weather) {
@@ -204,7 +196,6 @@ function generateRandomImage(response) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
   $homePage.className = 'homepage hidden';
-  $footer.className = 'view';
   $saveButton.className = 'save-button';
   $randomPage.className = 'randompage';
   $imageContainer.className = 'image-container';
@@ -237,7 +228,6 @@ function goBack(event) {
   removeContainer($viewFullContainer);
   removeContainer($errorContainer);
   removeContainer($imageContainer);
-  // $footer.className = 'view hidden';
   $viewFullContainer.remove();
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
@@ -335,28 +325,23 @@ function generateWeatherContent(response) {
     $conditionsContainer.appendChild($newCityHumidity);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
-      // $footer.className = 'view clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
       $weatherContainer.style.color = '#687179';
-      $weatherContainer.style.textShadow = '2px 3px 5px #aebdca';
+      $weatherContainer.style.textShadow = '2px 3px 5px lightgray';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
-      // $footer.className = 'view clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
       $weatherContainer.style.color = '#FAC934';
+      $weatherContainer.style.textShadow = '2px 3px 5px black';
     } else if (weatherCondition === 'Snow') {
-      // $footer.className = 'view snow';
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
       $weatherContainer.style.color = '#FFFAFA';
-
     } else if (weatherCondition === 'Rain') {
-      // $footer.className = 'view rain';
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
       $weatherContainer.style.color = '#224B8B';
     } else {
-      // $footer.className = 'view normal';
       $headerColor.className = 'header normal';
     }
   }

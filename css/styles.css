@@ -4,7 +4,7 @@ body {
 
 header {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
@@ -13,15 +13,6 @@ header {
   justify-content: space-evenly;
   align-items: baseline;
 }
-
-/* footer {
-  position: absolute;
-  bottom: 0;
-  z-index: 2;
-  background-color: hsla(215, 50%, 24%, 0.75);
-  height: 5rem;
-  width: 100%;
-} */
 
 h1 {
   font-size: 1.75em;
@@ -59,7 +50,7 @@ input {
 
 .clouds {
   background-color: #687179d8;
-  color: #aebdca;
+  color: white;
 }
 
 .clear {
@@ -115,11 +106,7 @@ input {
 .heading-container {
   display: flex;
   justify-content: center;
-
-  /* align-items: baseline; */
   z-index: 2;
-
-  /* margin: 0 5%; */
 }
 
 .main-container {
@@ -173,7 +160,7 @@ input {
 
 .view-one {
   position: fixed;
-  margin: 10% 2.5% 10% 2.5%;
+  margin: 1rem;
   padding-bottom: 5%;
   box-shadow: 7px 7px 15px rgb(78, 57, 57);
   text-shadow: 2px 2px 4px gray;
@@ -337,15 +324,15 @@ button:hover,
 }
 
 .big-heart {
-  color: rgb(236, 47, 63);
+  color: rgba(236, 47, 63, 0.75);
 }
 
 .overlay {
   position: fixed;
-  top: 5rem;
+  top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(226, 226, 226, 0.75);
-  z-index: 3;
+  z-index: 1;
 }
