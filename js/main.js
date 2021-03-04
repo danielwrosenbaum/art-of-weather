@@ -327,7 +327,7 @@ function generateWeatherContent(response) {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
       $weatherContainer.style.color = '#687179';
-      $weatherContainer.style.textShadow = '2px 3px 5px lightgray';
+      $weatherContainer.style.textShadow = '2px 3px 5px gray';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
