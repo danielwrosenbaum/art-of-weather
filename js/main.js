@@ -43,7 +43,7 @@ $goButton.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
-$deleteButton.addEventListener('click', deleteFromStorage);
+$deleteButton.addEventListener('click', deleteImage);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -204,7 +204,7 @@ function removeContainer(parent) {
   }
 }
 
-function deleteFromStorage(event) {
+function deleteImage(event) {
   var $idNum = Number(idNum);
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].id === $idNum) {
