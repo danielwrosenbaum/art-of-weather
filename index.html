@@ -30,19 +30,22 @@
     <div class="homepage view">
       <div class="homepage-buttons">
         <button class="get-button">Get Weather</button>
+        <button class="random-button">Random Painting</button>
         <button class="view-button">View Images</button>
       </div>
     </div>
     <div class="get-weather hidden">
       <div class="search-container">
-        <h2>Search by City:</h2>
-        <form class="city-form" onsubmit="submitCity(event)">
+        <h2 class="search-city">Search by City:</h2>
+        <form class="city-form">
           <input required name="cityName" type="text" placeholder="City Name">
           <div class="button-container">
             <input type="submit" class="go-button" value="Go!">
           </div>
         </form>
       </div>
+    </div>
+    <div class="randompage hidden">
     </div>
     <div class="viewpage hidden">
     </div>

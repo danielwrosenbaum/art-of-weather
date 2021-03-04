@@ -5,17 +5,16 @@ body {
 header {
   position: relative;
   z-index: 2;
-  border-radius: 0 0 5% 5%;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
+  box-shadow: 3px 3px 10px gray;
 }
 
 footer {
   position: absolute;
   bottom: 0;
   z-index: 2;
-  border-radius: 5% 5% 0 0;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
@@ -53,23 +52,23 @@ input {
 }
 
 .clouds {
-  background-color: rgba(128, 128, 128);
-  color: white;
+  background-color: #687179d8;
+  color: #aebdca;
 }
 
 .clear {
-  background-color: skyblue;
-  color: rgb(255, 227, 70);
+  background-color: #1f57ffd8;
+  color: #fac934;
 }
 
 .snow {
-  background-color: rgb(244, 244, 255);
-  color: rgb(190, 156, 253);
+  background-color: #fffafad8;
+  color: #b7c7d5;
 }
 
 .rain {
-  background-color: gray;
-  color: rgba(125, 125, 255, 0.986);
+  background-color: #224a8bd8;
+  color: #b2ddff;
 }
 
 .column-full {
@@ -126,14 +125,14 @@ input {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
-  text-shadow: 2px 2px  rgb(15, 15, 15);
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.75);
 }
 
 .search-container {
-  margin-bottom: 5%;
+  margin-top: 40%;
+  margin-bottom: 40%;
   text-align: center;
-  padding: 10px;
-  text-shadow: 2px 2px 8px gray;
+  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.6);
 }
 
 .view-container {
@@ -152,7 +151,7 @@ input {
   width: 45%;
   height: 45%;
   box-shadow: 2px 2px 5px gray;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   max-height: 50%;
 }
 
@@ -168,11 +167,11 @@ input {
   box-shadow: 7px 7px 15px rgb(78, 57, 57);
   text-shadow: 2px 2px 4px gray;
   text-align: center;
-  border-radius: 5%;
+  border-radius: 0.5rem;
 }
 
 .main-pic {
-  border-radius: 5%;
+  border-radius: 0.5rem;
   box-shadow: 5px 5px 10px gray;
 }
 
@@ -201,6 +200,15 @@ input {
   color: rgb(241, 250, 238);
   font-size: large;
   margin: auto;
+}
+
+.random-button {
+  height: 50px;
+  width: 200px;
+  font-size: large;
+  margin: auto;
+  background-color: #9dcaccb0;
+  color: rgb(255, 255, 255);
 }
 
 .view-button {
@@ -235,6 +243,20 @@ input {
   background-color: rgba(69, 123, 157, 0.65);
   color: rgb(241, 250, 238);
   margin-top: 15px;
+}
+
+button:focus {
+  outline: none;
+}
+
+.random-button:hover {
+  background-color: #7edde2;
+}
+
+.random-button:active {
+  background-color: #7fcdd1;
+  box-shadow: 0 5px #488a8d;
+  transform: translateY(4px);
 }
 
 .delete-button:hover,

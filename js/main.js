@@ -15,6 +15,9 @@ var $goButton = document.querySelector('.go-button');
 var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
 var $saveButton = document.querySelector('.save-button');
+var $searchCity = document.querySelector('.search-city');
+var $randomButton = document.querySelector('.random-button');
+var $randomPage = document.querySelector('.randompage');
 
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
@@ -29,20 +32,22 @@ var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
 var $deleteButton = document.createElement('button');
 
-var $newPic;
-var $newPicTitle;
-var $newArtistName;
-var $newPicAlt;
+var newPic;
+var newPicTitle;
+var newArtistName;
+var newPicAlt;
 var idNum;
 var index;
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $goButton.addEventListener('submit', submitCity);
+$form.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
-$deleteButton.addEventListener('click', deleteFromStorage);
+$deleteButton.addEventListener('click', deleteImage);
+$randomButton.addEventListener('click', getRandomImage);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -56,7 +61,6 @@ function submitCity(event) {
   event.preventDefault();
   var cityWeather = event.target.elements.cityName.value;
   getWeather(cityWeather);
-  $saveButton.className = 'save-button';
   goToWeather();
 }
 
@@ -121,61 +125,88 @@ function viewImage(event) {
 }
 
 function changeBackground(weather) {
-  var xhr4 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr4.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr4.responseType = 'json';
-  xhr4.addEventListener('load', function () {
-    generateRandomBackground(xhr4.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateRandomBackground(xhr.response);
     $loader.className = 'loader hidden';
   });
-  xhr4.send();
+  xhr.send();
 }
 
 function generateRandomBackground(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  var $newPic = response.artObjects[i].webImage.url;
-  var $newPicAlt = response.artObjects[i].title;
-  $newImage.setAttribute('src', $newPic);
-  $newImage.setAttribute('alt', $newPicAlt);
-  $randomBackground.setAttribute('src', $newPic);
-  $randomBackground.setAttribute('alt', $newPicAlt);
+  var newPic = response.artObjects[i].webImage.url;
+  var newPicAlt = response.artObjects[i].title;
+  $newImage.setAttribute('src', newPic);
+  $newImage.setAttribute('alt', newPicAlt);
+  $randomBackground.setAttribute('src', newPic);
+  $randomBackground.setAttribute('alt', newPicAlt);
 }
 
 // Gets an image for the Get Weather Page //
 function getArtData(weather) {
-  var xhr3 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr3.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr3.responseType = 'json';
-  xhr3.addEventListener('load', function () {
-    generateGetWeatherPage(xhr3.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateGetWeatherPage(xhr.response);
   });
-  xhr3.send();
+  xhr.send();
 }
 
+function getRandomImage() {
+  var xhr = new XMLHttpRequest();
+  $loader.className = 'loader';
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&toppieces=true');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateRandomImage(xhr.response);
+  });
+  xhr.send();
+
+}
 function generateGetWeatherPage(response) {
   index = Math.floor(Math.random() * response.artObjects.length);
-  var $newPic = response.artObjects[index].webImage.url;
-  var $newPicAlt = response.artObjects[index].title;
-  $randomBackground.setAttribute('src', $newPic);
-  $randomBackground.setAttribute('alt', $newPicAlt);
+  var newPic = response.artObjects[index].webImage.url;
+  var newPicAlt = response.artObjects[index].title;
+  $randomBackground.setAttribute('src', newPic);
+  $randomBackground.setAttribute('alt', newPicAlt);
   $backgroundPic.prepend($randomBackground);
+  $loader.className = 'loader hidden';
+
+}
+
+function generateRandomImage(response) {
+  var i = Math.floor(Math.random() * response.artObjects.length);
+  newPic = response.artObjects[i].webImage.url;
+  newPicTitle = response.artObjects[i].title;
+  newArtistName = response.artObjects[i].principalOrFirstMaker;
+  newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
+  $mainContainer.className = 'main-container content-wrap';
+  $headerColor.className = 'header normal';
+  $homePage.className = 'homepage hidden';
+  $footer.className = 'view';
+  $saveButton.className = 'save-button';
+  $randomPage.className = 'randompage';
   $imageContainer.className = 'image-container';
-  $getWeatherPage.prepend($imageContainer);
-  $newImage.setAttribute('src', $newPic);
-  $newImage.setAttribute('alt', $newPicAlt);
+  $randomPage.prepend($imageContainer);
+  $newImage.setAttribute('src', newPic);
+  $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
   $imageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = response.artObjects[index].title;
+  $newImageTitle.textContent = response.artObjects[i].title;
   $imageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = response.artObjects[index].principalOrFirstMaker;
+  $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
   $imageContainer.appendChild($newImageArtist);
   $loader.className = 'loader hidden';
-}
 
+}
 function goBack(event) {
   $mainContainer.className = 'main-container';
   $getWeatherPage.className = 'get-weather hidden';
@@ -204,10 +235,10 @@ function removeContainer(parent) {
   }
 }
 
-function deleteFromStorage(event) {
-  var $idNum = Number(idNum);
+function deleteImage(event) {
+  var idNumber = Number(idNum);
   for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].id === $idNum) {
+    if (data.entries[i].id === idNumber) {
       data.entries.splice(i, 1);
     }
   }
@@ -234,13 +265,15 @@ function getWeather(cityName) {
 
 function generateWeatherContent(response) {
   if (response.cod === '404') {
-    $weatherPage.prepend($errorContainer);
-    var notFound = document.createElement('h1');
-    notFound.className = 'row center';
-    notFound.textContent = 'City not found, please try again.';
-    $errorContainer.appendChild(notFound);
+    $saveButton.className = 'hidden';
+    $getWeatherPage.className = 'get-weather view';
+    $searchCity.textContent = 'City not found. Please try again.';
     $backButtonContainer.className = 'button-container row center';
+    window.setTimeout(function () {
+      errorMessage();
+    }, 2500);
   } else {
+    $saveButton.className = 'save-button';
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
     var weatherHumidity = 'Humidity:' + ' ' + response.main.humidity + '%';
@@ -275,35 +308,37 @@ function generateWeatherContent(response) {
     var $conditionsContainer = document.createElement('div');
     $conditionsContainer.className = 'column-half';
     $weatherRowContainer.append($conditionsContainer);
-    var newCityTemp = document.createElement('h2');
-    newCityTemp.textContent = cityTemp + ' \u00B0F';
-    $conditionsContainer.appendChild(newCityTemp);
-    var newCityWeather = document.createElement('h3');
-    newCityWeather.textContent = weatherCondition;
-    $conditionsContainer.appendChild(newCityWeather);
-    var newCityHumidity = document.createElement('h4');
-    newCityHumidity.textContent = weatherHumidity;
-    $conditionsContainer.appendChild(newCityHumidity);
+    var $newCityTemp = document.createElement('h2');
+    $newCityTemp.textContent = cityTemp + ' \u00B0F';
+    $conditionsContainer.appendChild($newCityTemp);
+    var $newCityWeather = document.createElement('h3');
+    $newCityWeather.textContent = weatherCondition;
+    $conditionsContainer.appendChild($newCityWeather);
+    var $newCityHumidity = document.createElement('h4');
+    $newCityHumidity.textContent = weatherHumidity;
+    $conditionsContainer.appendChild($newCityHumidity);
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
       $footer.className = 'view clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
-      $weatherContainer.style.color = 'white';
+      $weatherContainer.style.color = '#687179';
+      $weatherContainer.style.textShadow = '2px 3px 5px #aebdca';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $footer.className = 'view clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
-      $weatherContainer.style.color = 'rgb(255, 227, 70)';
+      $weatherContainer.style.color = '#FAC934';
     } else if (weatherCondition === 'Snow') {
       $footer.className = 'view snow';
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
-      $weatherContainer.style.color = 'rgb(156, 156, 253)';
+      $weatherContainer.style.color = '#FFFAFA';
+
     } else if (weatherCondition === 'Rain') {
       $footer.className = 'view rain';
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
-      $weatherContainer.style.color = 'rgba(125, 125, 255, 0.986)';
+      $weatherContainer.style.color = '#224B8B';
     } else {
       $footer.className = 'view normal';
       $headerColor.className = 'header normal';
@@ -317,46 +352,46 @@ function getArtWeather(weather) {
   if (weather === 'Clear') {
     weather = 'Sun';
   }
-  var xhr2 = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   $loader.className = 'loader';
-  xhr2.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
-  xhr2.responseType = 'json';
-  xhr2.addEventListener('load', function () {
-    generateWeatherPicture(xhr2.response);
+  xhr.open('GET', 'https://www.rijksmuseum.nl/api/en/collection?key=TnIr6Ed8&ps=100&imgonly=true&type=painting&q=' + weather);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    generateWeatherPicture(xhr.response);
   });
-  xhr2.send();
+  xhr.send();
 }
 
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  $newPic = response.artObjects[i].webImage.url;
-  $newPicTitle = response.artObjects[i].title;
-  $newArtistName = response.artObjects[i].principalOrFirstMaker;
-  $newPicAlt = $newPicTitle + ' ' + 'by' + ' ' + $newArtistName;
-  $randomBackground.setAttribute('src', $newPic);
-  $randomBackground.setAttribute('alt', $newPicAlt);
+  newPic = response.artObjects[i].webImage.url;
+  newPicTitle = response.artObjects[i].title;
+  newArtistName = response.artObjects[i].principalOrFirstMaker;
+  newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
+  $randomBackground.setAttribute('src', newPic);
+  $randomBackground.setAttribute('alt', newPicAlt);
   $backgroundPic.prepend($randomBackground);
   $weatherImageContainer.className = 'image-container';
   $weatherPage.prepend($weatherImageContainer);
   var $newImage = document.createElement('img');
-  $newImage.setAttribute('src', $newPic);
-  $newImage.setAttribute('alt', $newPicAlt);
+  $newImage.setAttribute('src', newPic);
+  $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
   $weatherImageContainer.prepend($newImage);
   var $newImageTitle = document.createElement('h4');
-  $newImageTitle.textContent = $newPicTitle;
+  $newImageTitle.textContent = newPicTitle;
   $weatherImageContainer.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
-  $newImageArtist.textContent = $newArtistName;
+  $newImageArtist.textContent = newArtistName;
   $weatherImageContainer.appendChild($newImageArtist);
   $loader.className = 'loader hidden';
 }
 
 function saveImageData(event) {
   var $pictureData = {
-    imageUrl: $newPic,
-    title: $newPicTitle,
-    artist: $newArtistName,
+    imageUrl: newPic,
+    title: newPicTitle,
+    artist: newArtistName,
     id: data.nextEntryId
   };
   data.entries.unshift($pictureData);
@@ -369,4 +404,8 @@ function saveImageData(event) {
 
 function closePopUp() {
   $saveButton.textContent = 'Save Image';
+}
+
+function errorMessage() {
+  $searchCity.textContent = 'Search by City';
 }
