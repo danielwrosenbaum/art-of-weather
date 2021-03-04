@@ -40,6 +40,7 @@ var index;
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $goButton.addEventListener('submit', submitCity);
+$form.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
 $saveButton.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
