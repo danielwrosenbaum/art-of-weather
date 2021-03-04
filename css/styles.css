@@ -8,6 +8,7 @@ header {
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
+  box-shadow: 3px 3px 10px gray;
 }
 
 footer {
@@ -56,7 +57,7 @@ input {
 }
 
 .clear {
-  background-color: #3064fd;
+  background-color: #0536cb;
   color: #fac934;
 }
 
@@ -124,11 +125,12 @@ input {
   margin-bottom: 25px;
   text-align: center;
   padding: 10px;
-  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
 .search-container {
-  margin-top: 50%;
+  margin-top: 40%;
+  margin-bottom: 40%;
   text-align: center;
   text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
 }
