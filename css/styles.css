@@ -9,19 +9,22 @@ header {
   height: 5rem;
   width: 100%;
   box-shadow: 3px 3px 10px gray;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
 }
 
-footer {
+/* footer {
   position: absolute;
   bottom: 0;
   z-index: 2;
   background-color: hsla(215, 50%, 24%, 0.75);
   height: 5rem;
   width: 100%;
-}
+} */
 
 h1 {
-  margin-block-end: auto;
+  font-size: 1.75em;
 }
 
 h4 {
@@ -47,6 +50,9 @@ input {
   height: 35px;
 }
 
+/* .icons {
+  position: fixed;
+} */
 .normal {
   color: white;
 }
@@ -103,13 +109,17 @@ input {
 }
 
 .content-wrap {
-  padding-bottom: 5rem;
+  padding-bottom: 1rem;
 }
 
 .heading-container {
   display: flex;
   justify-content: center;
+
+  /* align-items: baseline; */
   z-index: 2;
+
+  /* margin: 0 5%; */
 }
 
 .main-container {
@@ -221,12 +231,11 @@ input {
 }
 
 .back-button {
-  width: 140px;
-  height: 40px;
+  position: absolute;
+  top: 3rem;
+  left: 0.75rem;
   font-size: large;
-  background-color: rgba(230, 57, 70, 0.65);
   color: rgb(241, 250, 238);
-  margin-top: 15px;
 }
 
 .delete-button {
@@ -237,12 +246,11 @@ input {
 }
 
 .save-button {
-  width: 140px;
-  height: 40px;
+  position: absolute;
+  top: 3rem;
+  right: 0.75rem;
   font-size: large;
-  background-color: rgba(69, 123, 157, 0.65);
   color: rgb(241, 250, 238);
-  margin-top: 15px;
 }
 
 button:focus {
@@ -259,15 +267,22 @@ button:focus {
   transform: translateY(4px);
 }
 
+.save-button:hover {
+  color: rgb(236, 47, 63);
+}
+
+.save-button:active {
+  color: rgb(236, 47, 63);
+  transform: translateY(4px);
+}
+
 .delete-button:hover,
-.save-button:hover,
 .get-button:hover,
 .go-button:hover {
   background-color: rgba(0, 157, 255, 1);
 }
 
 .delete-button:active,
-.save-button:active,
 .get-button:active,
 .go-button:active {
   background-color: rgb(0, 157, 255);
@@ -275,13 +290,19 @@ button:focus {
   transform: translateY(4px);
 }
 
-.view-button:hover,
 .back-button:hover {
+  color: #7edde2;
+}
+
+.back-button:active {
+  transform: translateY(4px);
+}
+
+.view-button:hover {
   background-color: rgb(236, 47, 63);
 }
 
-.view-button:active,
-.back-button:active {
+.view-button:active {
   background-color: rgb(236, 47, 63);
   box-shadow: 0 5px rgb(145, 2, 14);
   transform: translateY(4px);
@@ -311,4 +332,8 @@ button:hover,
 .loading {
   width: 4rem;
   height: 4rem;
+}
+
+.big-heart {
+  color: rgb(236, 47, 63);
 }
