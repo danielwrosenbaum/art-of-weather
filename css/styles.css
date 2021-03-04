@@ -202,6 +202,15 @@ input {
   margin: auto;
 }
 
+.random-button {
+  height: 50px;
+  width: 200px;
+  font-size: large;
+  margin: auto;
+  background-color: #9dcaccb0;
+  color: rgb(255, 255, 255);
+}
+
 .view-button {
   height: 50px;
   width: 200px;
@@ -238,6 +247,16 @@ input {
 
 button:focus {
   outline: none;
+}
+
+.random-button:hover {
+  background-color: #7edde2;
+}
+
+.random-button:active {
+  background-color: #7fcdd1;
+  box-shadow: 0 5px #488a8d;
+  transform: translateY(4px);
 }
 
 .delete-button:hover,
