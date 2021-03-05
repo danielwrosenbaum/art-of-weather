@@ -35,8 +35,7 @@ A weather app that allows the user to look up the current weather in a city whil
 * How to adjust media settings for mobile and screen without limiting functionality for either.
 * How to add a loading spinner that appears whenever an API request is loading.
 
-## Screenshots
+## Example
 
-![first gif](https://user-images.githubusercontent.com/74999873/109911319-b166b380-7c5e-11eb-9096-b084e7eeae76.gif)
+![art-of-weather gif](https://user-images.githubusercontent.com/74999873/110053402-3361e580-7d0e-11eb-9acc-dec145f73c17.gif)
 
-![gif 2](https://user-images.githubusercontent.com/74999873/109911332-b461a400-7c5e-11eb-880e-71dbab6b7a15.gif)
