@@ -41,9 +41,6 @@ input {
   height: 35px;
 }
 
-/* .icons {
-  position: fixed;
-} */
 .normal {
   color: white;
 }
@@ -70,6 +67,14 @@ input {
 
 .column-full {
   width: 100%;
+}
+
+.column-most {
+  width: 75%;
+}
+
+.column-some {
+  width: 25%;
 }
 
 .column-half {
@@ -119,10 +124,13 @@ input {
 }
 
 .weather-container {
-  margin-bottom: 25px;
+  margin: 10% 5% 5% 5%;
   text-align: center;
-  padding: 10px;
-  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.75);
+  padding: 2.5%;
+  text-shadow: 2px 3px 5px rgba(146, 145, 145, 0.75);
+  box-shadow: 2px 2px 7px black;
+  border-radius: 0.5rem;
+  background-color: rgba(219, 211, 211, 0.35);
 }
 
 .search-container {
@@ -141,6 +149,7 @@ input {
 
 .image-container {
   margin: 5%;
+  position: relative;
 }
 
 .view-image-pic {
@@ -213,7 +222,7 @@ input {
 .view-button {
   height: 50px;
   width: 200px;
-  font-size: large;
+  font-size: larger;
   background-color: rgba(230, 57, 70, 0.65);
   color: rgb(241, 250, 238);
   margin: auto;
@@ -223,6 +232,14 @@ input {
   position: absolute;
   top: 3rem;
   left: 0.75rem;
+  font-size: larger;
+  color: rgb(241, 250, 238);
+}
+
+.view-saved {
+  position: absolute;
+  top: 3rem;
+  right: 0.75rem;
   font-size: large;
   color: rgb(241, 250, 238);
 }
@@ -235,11 +252,10 @@ input {
 }
 
 .save-button {
-  position: absolute;
-  top: 3rem;
-  right: 0.75rem;
+  margin: 5%;
+  float: right;
   font-size: large;
-  color: rgb(241, 250, 238);
+  color: black;
 }
 
 button:focus {
@@ -279,10 +295,12 @@ button:focus {
   transform: translateY(4px);
 }
 
+.view-saved:hover,
 .back-button:hover {
   color: #7edde2;
 }
 
+.view-saved:active,
 .back-button:active {
   transform: translateY(4px);
 }

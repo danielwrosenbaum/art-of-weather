@@ -14,12 +14,12 @@ var $form = document.querySelector('.city-form');
 var $goButton = document.querySelector('.go-button');
 var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
-var $saveButton = document.querySelector('.save-button');
 var $searchCity = document.querySelector('.search-city');
 var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
-var $heart = document.querySelector('.heart');
+var $viewSaved = document.querySelector('.view-saved');
 
+var $heartContainer = document.createElement('a');
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
 var $randomBackground = document.createElement('img');
@@ -32,9 +32,11 @@ var $weatherImageContainer = document.createElement('div');
 var $viewImageContainer = document.createElement('div');
 var $viewFullContainer = document.createElement('div');
 var $deleteButton = document.createElement('button');
+var $smallHeart = document.createElement('i');
 var $bigHeart = document.createElement('i');
 var $overlay = document.createElement('div');
 var $viewFullImage = document.createElement('img');
+var $infoContainer = document.createElement('div');
 
 var newPic;
 var newPicTitle;
@@ -42,13 +44,15 @@ var newArtistName;
 var newPicAlt;
 var idNum;
 var index;
+$heartContainer.className = 'save-button';
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
 $goButton.addEventListener('submit', submitCity);
 $form.addEventListener('submit', submitCity);
 $viewButton.addEventListener('click', goToView);
-$saveButton.addEventListener('click', saveImageData);
+$viewSaved.addEventListener('click', goToView);
+$smallHeart.addEventListener('click', saveImageData);
 $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteImage);
 $randomButton.addEventListener('click', getRandomImage);
@@ -76,15 +80,22 @@ function goToGet(event) {
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
-  $saveButton.className = 'hidden';
 }
 
 // Go to the View Saved Images Page //
 function goToView(event) {
+  removeContainer($imageContainer);
+  removeContainer($infoContainer);
+  removeContainer($weatherContainer);
+  removeContainer($weatherImageContainer);
+  $weatherPage.className = 'weatherpage hidden';
+  $viewSaved.className = 'hidden';
+  $headerColor.className = 'header hidden';
+  $weatherHeading.className = 'hidden';
+  $getWeatherPage.className = 'get-weather hidden';
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  $saveButton.className = 'hidden';
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
@@ -184,11 +195,11 @@ function generateGetWeatherPage(response) {
   $randomBackground.setAttribute('alt', newPicAlt);
   $backgroundPic.prepend($randomBackground);
   $loader.className = 'loader hidden';
-
 }
 
 function generateRandomImage(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
+  $mainHeading.className = 'heading hidden';
   newPic = response.artObjects[i].webImage.url;
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
@@ -196,24 +207,36 @@ function generateRandomImage(response) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
   $homePage.className = 'homepage hidden';
-  $saveButton.className = 'save-button';
   $randomPage.className = 'randompage';
+  var $infoContainerColumnMost = document.createElement('div');
+  var $infoContainerColumnSome = document.createElement('div');
   $imageContainer.className = 'image-container';
   $randomPage.prepend($imageContainer);
   $newImage.setAttribute('src', newPic);
   $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
   $imageContainer.prepend($newImage);
+  $infoContainer.className = 'row';
+  $imageContainer.append($infoContainer);
+  $infoContainerColumnMost.className = 'column-most';
+  $infoContainer.prepend($infoContainerColumnMost);
   var $newImageTitle = document.createElement('h4');
   $newImageTitle.textContent = response.artObjects[i].title;
-  $imageContainer.appendChild($newImageTitle);
+  $infoContainerColumnMost.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = response.artObjects[i].principalOrFirstMaker;
-  $imageContainer.appendChild($newImageArtist);
+  $infoContainerColumnMost.appendChild($newImageArtist);
+  $infoContainer.appendChild($infoContainerColumnSome);
+  $infoContainerColumnSome.className = 'column-some';
+  $infoContainerColumnSome.append($heartContainer);
+  $heartContainer.className = 'save-button';
+  $heartContainer.appendChild($smallHeart);
+  $smallHeart.className = 'far fa-heart heart';
   $loader.className = 'loader hidden';
-
 }
+
 function goBack(event) {
+  $viewSaved.className = 'view-saved';
   $mainContainer.className = 'main-container';
   $getWeatherPage.className = 'get-weather hidden';
   $homePage.className = 'homepage view';
@@ -228,7 +251,7 @@ function goBack(event) {
   removeContainer($viewFullContainer);
   removeContainer($errorContainer);
   removeContainer($imageContainer);
-  $viewFullContainer.remove();
+  removeContainer($infoContainer);
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   $overlay.className = 'hidden';
@@ -271,7 +294,6 @@ function getWeather(cityName) {
 
 function generateWeatherContent(response) {
   if (response.cod === '404') {
-    $saveButton.className = 'hidden';
     $getWeatherPage.className = 'get-weather view';
     $searchCity.textContent = 'City not found. Please try again.';
     $backButtonContainer.className = 'button-container row center';
@@ -279,7 +301,6 @@ function generateWeatherContent(response) {
       errorMessage();
     }, 2500);
   } else {
-    $saveButton.className = 'save-button';
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
     var weatherHumidity = 'Humidity:' + ' ' + response.main.humidity + '%';
@@ -326,21 +347,19 @@ function generateWeatherContent(response) {
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
-      $weatherContainer.style.color = '#687179';
-      $weatherContainer.style.textShadow = '2px 3px 5px gray';
+      $weatherIcon.style.color = '#687179';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
-      $weatherContainer.style.color = '#FAC934';
-      $weatherContainer.style.textShadow = '2px 3px 5px black';
+      $weatherIcon.style.color = '#FAC934';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
-      $weatherContainer.style.color = '#FFFAFA';
+      $weatherIcon.style.color = '#FFFAFA';
     } else if (weatherCondition === 'Rain') {
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
-      $weatherContainer.style.color = '#224B8B';
+      $weatherIcon.style.color = '#224B8B';
     } else {
       $headerColor.className = 'header normal';
     }
@@ -375,16 +394,29 @@ function generateWeatherPicture(response) {
   $weatherImageContainer.className = 'image-container';
   $weatherPage.prepend($weatherImageContainer);
   var $newImage = document.createElement('img');
+  var $infoContainerColumnMost = document.createElement('div');
+  var $infoContainerColumnSome = document.createElement('div');
+
   $newImage.setAttribute('src', newPic);
   $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
   $weatherImageContainer.prepend($newImage);
+  $infoContainer.className = 'row';
+  $weatherImageContainer.append($infoContainer);
+  $infoContainerColumnMost.className = 'column-most';
+  $infoContainer.prepend($infoContainerColumnMost);
   var $newImageTitle = document.createElement('h4');
   $newImageTitle.textContent = newPicTitle;
-  $weatherImageContainer.appendChild($newImageTitle);
+  $infoContainerColumnMost.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = newArtistName;
-  $weatherImageContainer.appendChild($newImageArtist);
+  $infoContainerColumnMost.appendChild($newImageArtist);
+  $infoContainer.appendChild($infoContainerColumnSome);
+  $infoContainerColumnSome.className = 'column-some';
+  $infoContainerColumnSome.append($heartContainer);
+  $heartContainer.className = 'save-button';
+  $heartContainer.appendChild($smallHeart);
+  $smallHeart.className = 'far fa-heart heart';
   $loader.className = 'loader hidden';
 }
 
@@ -397,8 +429,8 @@ function saveImageData(event) {
   };
   data.entries.unshift($pictureData);
   data.nextEntryId++;
-  $heart.className = 'fas fa-heart heart';
-  $heart.style.color = 'rgb(236, 47, 63)';
+  $smallHeart.className = 'fas fa-heart heart';
+  $smallHeart.style.color = 'rgb(236, 47, 63)';
   $loader.className = 'loader';
   $loader.append($bigHeart);
   $bigHeart.className = 'big-heart fas fa-heart fa-6x';
@@ -409,8 +441,8 @@ function saveImageData(event) {
 }
 
 function closePopUp() {
-  $heart.className = 'far fa-heart heart';
-  $heart.style.color = 'rgb(241, 250, 238)';
+  $smallHeart.className = 'far fa-heart heart';
+  $smallHeart.style.color = 'black';
   $loader.className = 'loader hidden';
   $bigHeart.className = 'hidden';
   $loading.className = 'loading';
@@ -418,5 +450,4 @@ function closePopUp() {
 
 function errorMessage() {
   $searchCity.textContent = 'Search by City';
-
 }
