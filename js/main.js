@@ -44,6 +44,7 @@ var newArtistName;
 var newPicAlt;
 var idNum;
 var index;
+$heartContainer.className = 'save-button';
 
 $getButton.addEventListener('click', goToGet);
 $backButton.addEventListener('click', goBack);
@@ -95,7 +96,6 @@ function goToView(event) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  // $saveButton.className = 'hidden';
   $headingContainer.appendChild($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
@@ -195,13 +195,11 @@ function generateGetWeatherPage(response) {
   $randomBackground.setAttribute('alt', newPicAlt);
   $backgroundPic.prepend($randomBackground);
   $loader.className = 'loader hidden';
-
 }
 
 function generateRandomImage(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   $mainHeading.className = 'heading hidden';
-
   newPic = response.artObjects[i].webImage.url;
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
@@ -209,7 +207,6 @@ function generateRandomImage(response) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
   $homePage.className = 'homepage hidden';
-  // $saveButton.className = 'save-button';
   $randomPage.className = 'randompage';
   var $infoContainerColumnMost = document.createElement('div');
   var $infoContainerColumnSome = document.createElement('div');
@@ -236,8 +233,8 @@ function generateRandomImage(response) {
   $heartContainer.appendChild($smallHeart);
   $smallHeart.className = 'far fa-heart heart';
   $loader.className = 'loader hidden';
-
 }
+
 function goBack(event) {
   $viewSaved.className = 'view-saved';
   $mainContainer.className = 'main-container';
@@ -255,7 +252,6 @@ function goBack(event) {
   removeContainer($errorContainer);
   removeContainer($imageContainer);
   removeContainer($infoContainer);
-  // $viewFullContainer.remove();
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   $overlay.className = 'hidden';
@@ -298,7 +294,6 @@ function getWeather(cityName) {
 
 function generateWeatherContent(response) {
   if (response.cod === '404') {
-    // $saveButton.className = 'hidden';
     $getWeatherPage.className = 'get-weather view';
     $searchCity.textContent = 'City not found. Please try again.';
     $backButtonContainer.className = 'button-container row center';
@@ -306,7 +301,6 @@ function generateWeatherContent(response) {
       errorMessage();
     }, 2500);
   } else {
-    // $saveButton.className = 'save-button';
     var cityTemp = Math.trunc(response.main.temp);
     var weatherCondition = response.weather[0].main;
     var weatherHumidity = 'Humidity:' + ' ' + response.main.humidity + '%';
@@ -413,11 +407,9 @@ function generateWeatherPicture(response) {
   $infoContainer.prepend($infoContainerColumnMost);
   var $newImageTitle = document.createElement('h4');
   $newImageTitle.textContent = newPicTitle;
-  // $weatherImageContainer.appendChild($newImageTitle);
   $infoContainerColumnMost.appendChild($newImageTitle);
   var $newImageArtist = document.createElement('div');
   $newImageArtist.textContent = newArtistName;
-  // $weatherImageContainer.appendChild($newImageArtist);
   $infoContainerColumnMost.appendChild($newImageArtist);
   $infoContainer.appendChild($infoContainerColumnSome);
   $infoContainerColumnSome.className = 'column-some';
@@ -450,7 +442,7 @@ function saveImageData(event) {
 
 function closePopUp() {
   $smallHeart.className = 'far fa-heart heart';
-  $smallHeart.style.color = 'rgb(241, 250, 238)';
+  $smallHeart.style.color = 'black';
   $loader.className = 'loader hidden';
   $bigHeart.className = 'hidden';
   $loading.className = 'loading';
@@ -458,5 +450,4 @@ function closePopUp() {
 
 function errorMessage() {
   $searchCity.textContent = 'Search by City';
-
 }

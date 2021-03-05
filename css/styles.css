@@ -41,9 +41,6 @@ input {
   height: 35px;
 }
 
-/* .icons {
-  position: fixed;
-} */
 .normal {
   color: white;
 }
@@ -225,7 +222,7 @@ input {
 .view-button {
   height: 50px;
   width: 200px;
-  font-size: large;
+  font-size: larger;
   background-color: rgba(230, 57, 70, 0.65);
   color: rgb(241, 250, 238);
   margin: auto;
@@ -235,7 +232,7 @@ input {
   position: absolute;
   top: 3rem;
   left: 0.75rem;
-  font-size: large;
+  font-size: larger;
   color: rgb(241, 250, 238);
 }
 
