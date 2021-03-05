@@ -127,10 +127,13 @@ input {
 }
 
 .weather-container {
-  margin-bottom: 25px;
+  margin: 10% 5% 5% 5%;
   text-align: center;
-  padding: 10px;
-  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.75);
+  padding: 2.5%;
+  text-shadow: 2px 3px 5px rgba(146, 145, 145, 0.75);
+  box-shadow: 2px 2px 7px black;
+  border-radius: 0.5rem;
+  background-color: rgba(219, 211, 211, 0.35);
 }
 
 .search-container {

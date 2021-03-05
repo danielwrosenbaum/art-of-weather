@@ -14,14 +14,12 @@ var $form = document.querySelector('.city-form');
 var $goButton = document.querySelector('.go-button');
 var $getButton = document.querySelector('.get-button');
 var $viewButton = document.querySelector('.view-button');
-
 var $searchCity = document.querySelector('.search-city');
 var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
-// var $heart = document.querySelector('.heart');
 var $viewSaved = document.querySelector('.view-saved');
-var $heartContainer = document.createElement('a');
 
+var $heartContainer = document.createElement('a');
 var $viewPageHeader = document.createElement('h1');
 var $weatherHeading = document.createElement('h1');
 var $randomBackground = document.createElement('img');
@@ -39,8 +37,6 @@ var $bigHeart = document.createElement('i');
 var $overlay = document.createElement('div');
 var $viewFullImage = document.createElement('img');
 var $infoContainer = document.createElement('div');
-// var $saveButton = document.createElement('.a');
-// var $infoContainer = document.createElement('div');
 
 var newPic;
 var newPicTitle;
@@ -83,7 +79,6 @@ function goToGet(event) {
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
   $homePage.className = 'homepage hidden';
-  // $saveButton.className = 'hidden';
 }
 
 // Go to the View Saved Images Page //
@@ -92,6 +87,7 @@ function goToView(event) {
   removeContainer($infoContainer);
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
+  $weatherPage.className = 'weatherpage hidden';
   $viewSaved.className = 'hidden';
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
@@ -259,7 +255,7 @@ function goBack(event) {
   removeContainer($errorContainer);
   removeContainer($imageContainer);
   removeContainer($infoContainer);
-  $viewFullContainer.remove();
+  // $viewFullContainer.remove();
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   $overlay.className = 'hidden';
@@ -357,21 +353,19 @@ function generateWeatherContent(response) {
     if (weatherCondition === 'Clouds') {
       $headerColor.className = 'header clouds';
       $weatherIcon.className = 'fas fa-cloud fa-7x';
-      $weatherContainer.style.color = '#687179';
-      $weatherContainer.style.textShadow = '2px 3px 5px gray';
+      $weatherIcon.style.color = '#687179';
     } else if (weatherCondition === 'Clear') {
       $headerColor.className = 'header clear';
       $weatherIcon.className = 'fas fa-sun fa-7x';
-      $weatherContainer.style.color = '#FAC934';
-      $weatherContainer.style.textShadow = '2px 3px 5px black';
+      $weatherIcon.style.color = '#FAC934';
     } else if (weatherCondition === 'Snow') {
       $headerColor.className = 'header snow';
       $weatherIcon.className = 'far fa-snowflake fa-7x';
-      $weatherContainer.style.color = '#FFFAFA';
+      $weatherIcon.style.color = '#FFFAFA';
     } else if (weatherCondition === 'Rain') {
       $headerColor.className = 'header rain';
       $weatherIcon.className = 'fas fa-cloud-showers-heavy fa-7x';
-      $weatherContainer.style.color = '#224B8B';
+      $weatherIcon.style.color = '#224B8B';
     } else {
       $headerColor.className = 'header normal';
     }
