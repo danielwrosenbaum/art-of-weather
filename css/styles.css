@@ -10,14 +10,18 @@ header {
   width: 100%;
   box-shadow: 3px 3px 10px gray;
   display: flex;
-  justify-content: space-evenly;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 h1 {
   font-size: 1.75em;
+  margin-block-end: 0;
 }
 
+/* .main-header {
+  margin-block-end: 0;
+} */
 h4 {
   margin: 5px 0 0 0;
 }
@@ -110,7 +114,10 @@ input {
 
 .heading-container {
   display: flex;
+  width: 100%;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   z-index: 2;
 }
 
@@ -215,7 +222,7 @@ input {
   width: 200px;
   font-size: large;
   margin: auto;
-  background-color: #9dcaccb0;
+  background-color: #9dcaccdc;
   color: rgb(255, 255, 255);
 }
 
@@ -229,7 +236,7 @@ input {
 }
 
 .back-button {
-  position: absolute;
+  /* position: absolute; */
   top: 3rem;
   left: 0.75rem;
   font-size: larger;
@@ -237,7 +244,7 @@ input {
 }
 
 .view-saved {
-  position: absolute;
+  /* position: absolute; */
   top: 3rem;
   right: 0.75rem;
   font-size: large;
@@ -353,4 +360,42 @@ button:hover,
   width: 100%;
   background-color: rgba(226, 226, 226, 0.75);
   z-index: 1;
+}
+
+.error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(184, 172, 172, 0.664);
+  z-index: 1;
+}
+
+.nav-buttons {
+  margin: 0 1rem 0.5rem 1rem;
+}
+
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.5rem 1rem;
+}
+
+.pop-up {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  width: 50%;
+  height: 20%;
+  top: 40%;
+  left: 25%;
+  background-color: rgba(0, 157, 255, 0.719);
+  color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+  padding: 1rem;
 }

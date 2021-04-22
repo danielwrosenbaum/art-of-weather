@@ -18,6 +18,7 @@ var $searchCity = document.querySelector('.search-city');
 var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
 var $viewSaved = document.querySelector('.view-saved');
+var $mainHeader = document.querySelector('.main-header');
 
 var $heartContainer = document.createElement('a');
 var $viewPageHeader = document.createElement('h1');
@@ -37,6 +38,8 @@ var $bigHeart = document.createElement('i');
 var $overlay = document.createElement('div');
 var $viewFullImage = document.createElement('img');
 var $infoContainer = document.createElement('div');
+var $popUp = document.createElement('div');
+var $errorOverlay = document.createElement('div');
 
 var newPic;
 var newPicTitle;
@@ -88,6 +91,7 @@ function goToView(event) {
   removeContainer($infoContainer);
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
+  removeContainer($errorOverlay);
   $weatherPage.className = 'weatherpage hidden';
   $viewSaved.className = 'hidden';
   $headerColor.className = 'header hidden';
@@ -96,7 +100,7 @@ function goToView(event) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  $headingContainer.appendChild($viewPageHeader);
+  $headingContainer.prepend($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
   changeBackground('autumn');
@@ -151,6 +155,7 @@ function changeBackground(weather) {
     generateRandomBackground(xhr.response);
     $loader.className = 'loader hidden';
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -173,6 +178,7 @@ function getArtData(weather) {
   xhr.addEventListener('load', function () {
     generateGetWeatherPage(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -184,6 +190,7 @@ function getRandomImage() {
   xhr.addEventListener('load', function () {
     generateRandomImage(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 
 }
@@ -199,13 +206,14 @@ function generateGetWeatherPage(response) {
 
 function generateRandomImage(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  $mainHeading.className = 'heading hidden';
+  $mainHeading.className = 'heading';
   newPic = response.artObjects[i].webImage.url;
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
   newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
+  $mainHeader.textContent = 'Random Painting';
   $homePage.className = 'homepage hidden';
   $randomPage.className = 'randompage';
   var $infoContainerColumnMost = document.createElement('div');
@@ -242,6 +250,7 @@ function goBack(event) {
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
+  $mainHeader.textContent = 'Get Weather';
   $headerColor.className = 'header normal';
   $viewPageHeader.className = 'hidden';
   $mainHeading.className = 'heading view';
@@ -252,6 +261,9 @@ function goBack(event) {
   removeContainer($errorContainer);
   removeContainer($imageContainer);
   removeContainer($infoContainer);
+  removeContainer($errorOverlay);
+  removeContainer($popUp);
+  $errorOverlay.className = 'hidden';
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   $overlay.className = 'hidden';
@@ -289,6 +301,7 @@ function getWeather(cityName) {
   xhr.addEventListener('load', function () {
     generateWeatherContent(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -308,7 +321,7 @@ function generateWeatherContent(response) {
     $mainHeading.className = 'heading hidden';
     $weatherHeading.className = 'view';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
-    $headingContainer.appendChild($weatherHeading);
+    $headingContainer.prepend($weatherHeading);
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
@@ -379,6 +392,7 @@ function getArtWeather(weather) {
   xhr.addEventListener('load', function () {
     generateWeatherPicture(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -396,7 +410,6 @@ function generateWeatherPicture(response) {
   var $newImage = document.createElement('img');
   var $infoContainerColumnMost = document.createElement('div');
   var $infoContainerColumnSome = document.createElement('div');
-
   $newImage.setAttribute('src', newPic);
   $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
@@ -416,10 +429,23 @@ function generateWeatherPicture(response) {
   $infoContainerColumnSome.append($heartContainer);
   $heartContainer.className = 'save-button';
   $heartContainer.appendChild($smallHeart);
-  $smallHeart.className = 'far fa-heart heart';
+  if ((add(data.entries, newPic) === null)) {
+    $smallHeart.className = 'fas fa-heart heart';
+    $smallHeart.style.color = 'rgb(236, 47, 63)';
+  } else {
+    $smallHeart.className = 'far fa-heart heart';
+    $smallHeart.style.color = 'black';
+  }
   $loader.className = 'loader hidden';
 }
-
+function add(array, imageUrl) {
+  var found = array.some(item => item.imageUrl === imageUrl);
+  if (!found) {
+    return imageUrl;
+  } else {
+    return null;
+  }
+}
 function saveImageData(event) {
   var $pictureData = {
     imageUrl: newPic,
@@ -427,22 +453,24 @@ function saveImageData(event) {
     artist: newArtistName,
     id: data.nextEntryId
   };
-  data.entries.unshift($pictureData);
-  data.nextEntryId++;
-  $smallHeart.className = 'fas fa-heart heart';
-  $smallHeart.style.color = 'rgb(236, 47, 63)';
-  $loader.className = 'loader';
-  $loader.append($bigHeart);
-  $bigHeart.className = 'big-heart fas fa-heart fa-6x';
-  $loading.className = 'loading hidden';
-  window.setTimeout(function () {
-    closePopUp();
-  }, 1500);
+  if (add(data.entries, $pictureData.imageUrl) !== null) {
+    data.entries.unshift($pictureData);
+    data.nextEntryId++;
+    $smallHeart.className = 'fas fa-heart heart';
+    $smallHeart.style.color = 'rgb(236, 47, 63)';
+    $loader.className = 'loader';
+    $loader.append($bigHeart);
+    $bigHeart.className = 'big-heart fas fa-heart fa-6x';
+    $loading.className = 'loading hidden';
+    window.setTimeout(function () {
+      closePopUp();
+    }, 1500);
+  } else {
+    $smallHeart.className = 'fas fa-heart heart';
+  }
 }
 
 function closePopUp() {
-  $smallHeart.className = 'far fa-heart heart';
-  $smallHeart.style.color = 'black';
   $loader.className = 'loader hidden';
   $bigHeart.className = 'hidden';
   $loading.className = 'loading';
@@ -450,4 +478,13 @@ function closePopUp() {
 
 function errorMessage() {
   $searchCity.textContent = 'Search by City';
+}
+
+function loadError() {
+  $loader.className = 'loader hidden';
+  $mainContainer.prepend($errorOverlay);
+  $errorOverlay.className = 'error-overlay';
+  $errorOverlay.append($popUp);
+  $popUp.className = 'pop-up';
+  $popUp.textContent = 'Oops Something Went Wrong. Please Try Again!';
 }
