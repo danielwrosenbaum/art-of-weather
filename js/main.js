@@ -19,6 +19,7 @@ var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
 var $viewSaved = document.querySelector('.view-saved');
 var $mainHeader = document.querySelector('.main-header');
+var $appTitle = document.querySelector('.app-title');
 
 var $heartContainer = document.createElement('a');
 var $viewPageHeader = document.createElement('h1');
@@ -60,6 +61,7 @@ $viewImageContainer.addEventListener('click', viewImage);
 $deleteButton.addEventListener('click', deleteImage);
 $randomButton.addEventListener('click', getRandomImage);
 $overlay.addEventListener('click', backToView);
+$errorOverlay.addEventListener('click', goBack);
 
 // Generate a specific image for homepage background: //
 homePageBackground();
@@ -79,6 +81,7 @@ function submitCity(event) {
 // Go to the Get Weather Page //
 function goToGet(event) {
   $mainContainer.className = 'main-container content-wrap';
+  $appTitle.className = 'app-title hidden';
   getArtData('snow');
   $headerColor.className = 'header normal';
   $getWeatherPage.className = 'get-weather view';
@@ -93,6 +96,7 @@ function goToView(event) {
   removeContainer($weatherImageContainer);
   removeContainer($errorOverlay);
   $weatherPage.className = 'weatherpage hidden';
+  $appTitle.className = 'app-title hidden';
   $viewSaved.className = 'hidden';
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
@@ -207,6 +211,7 @@ function generateGetWeatherPage(response) {
 function generateRandomImage(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   $mainHeading.className = 'heading';
+  $appTitle.className = 'app-title hidden';
   newPic = response.artObjects[i].webImage.url;
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
@@ -244,6 +249,7 @@ function generateRandomImage(response) {
 }
 
 function goBack(event) {
+  $appTitle.className = 'app-title';
   $viewSaved.className = 'view-saved';
   $mainContainer.className = 'main-container';
   $getWeatherPage.className = 'get-weather hidden';
