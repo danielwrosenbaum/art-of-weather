@@ -385,6 +385,7 @@ function getArtWeather(weather) {
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   newPic = response.artObjects[i].webImage.url;
+
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
   newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
@@ -416,10 +417,23 @@ function generateWeatherPicture(response) {
   $infoContainerColumnSome.append($heartContainer);
   $heartContainer.className = 'save-button';
   $heartContainer.appendChild($smallHeart);
-  $smallHeart.className = 'far fa-heart heart';
+  if ((add(data.entries, newPic) === null)) {
+    $smallHeart.className = 'fas fa-heart heart';
+    $smallHeart.style.color = 'rgb(236, 47, 63)';
+  } else {
+    $smallHeart.className = 'far fa-heart heart';
+    $smallHeart.style.color = 'black';
+  }
   $loader.className = 'loader hidden';
 }
-
+function add(array, imageUrl) {
+  var found = array.some(item => item.imageUrl === imageUrl);
+  if (!found) {
+    return imageUrl;
+  } else {
+    return null;
+  }
+}
 function saveImageData(event) {
   var $pictureData = {
     imageUrl: newPic,
@@ -427,22 +441,24 @@ function saveImageData(event) {
     artist: newArtistName,
     id: data.nextEntryId
   };
-  data.entries.unshift($pictureData);
-  data.nextEntryId++;
-  $smallHeart.className = 'fas fa-heart heart';
-  $smallHeart.style.color = 'rgb(236, 47, 63)';
-  $loader.className = 'loader';
-  $loader.append($bigHeart);
-  $bigHeart.className = 'big-heart fas fa-heart fa-6x';
-  $loading.className = 'loading hidden';
-  window.setTimeout(function () {
-    closePopUp();
-  }, 1500);
+  if (add(data.entries, $pictureData.imageUrl) !== null) {
+    data.entries.unshift($pictureData);
+    data.nextEntryId++;
+    $smallHeart.className = 'fas fa-heart heart';
+    $smallHeart.style.color = 'rgb(236, 47, 63)';
+    $loader.className = 'loader';
+    $loader.append($bigHeart);
+    $bigHeart.className = 'big-heart fas fa-heart fa-6x';
+    $loading.className = 'loading hidden';
+    window.setTimeout(function () {
+      closePopUp();
+    }, 1500);
+  } else {
+    $smallHeart.className = 'fas fa-heart heart';
+  }
 }
 
 function closePopUp() {
-  $smallHeart.className = 'far fa-heart heart';
-  $smallHeart.style.color = 'black';
   $loader.className = 'loader hidden';
   $bigHeart.className = 'hidden';
   $loading.className = 'loading';
