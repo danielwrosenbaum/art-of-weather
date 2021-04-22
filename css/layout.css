@@ -27,6 +27,12 @@ body {
   height: 100%;
 }
 
+@media screen and (orientation: landscape) {
+  .search-container {
+    margin: 5rem !important;
+  }
+}
+
 @media screen and (min-width: 575px) {
   .background-pic {
     left: 0;
@@ -35,8 +41,6 @@ body {
   .nav-buttons {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-
-    /* margin: 0.5rem 1rem; */
   }
 }
 
