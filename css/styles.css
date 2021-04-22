@@ -10,8 +10,8 @@ header {
   width: 100%;
   box-shadow: 3px 3px 10px gray;
   display: flex;
-  justify-content: space-evenly;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 h1 {
@@ -215,7 +215,7 @@ input {
   width: 200px;
   font-size: large;
   margin: auto;
-  background-color: #9dcaccb0;
+  background-color: #9dcaccdc;
   color: rgb(255, 255, 255);
 }
 
@@ -229,7 +229,7 @@ input {
 }
 
 .back-button {
-  position: absolute;
+  /* position: absolute; */
   top: 3rem;
   left: 0.75rem;
   font-size: larger;
@@ -237,7 +237,7 @@ input {
 }
 
 .view-saved {
-  position: absolute;
+  /* position: absolute; */
   top: 3rem;
   right: 0.75rem;
   font-size: large;
@@ -353,4 +353,8 @@ button:hover,
   width: 100%;
   background-color: rgba(226, 226, 226, 0.75);
   z-index: 1;
+}
+
+.nav-buttons {
+  margin: 0.5rem;
 }
