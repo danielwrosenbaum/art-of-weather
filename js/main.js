@@ -18,6 +18,7 @@ var $searchCity = document.querySelector('.search-city');
 var $randomButton = document.querySelector('.random-button');
 var $randomPage = document.querySelector('.randompage');
 var $viewSaved = document.querySelector('.view-saved');
+var $mainHeader = document.querySelector('.main-header');
 
 var $heartContainer = document.createElement('a');
 var $viewPageHeader = document.createElement('h1');
@@ -96,7 +97,7 @@ function goToView(event) {
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'heading normal';
   $mainHeading.className = 'heading hidden';
-  $headingContainer.appendChild($viewPageHeader);
+  $headingContainer.prepend($viewPageHeader);
   $viewPageHeader.className = 'view normal';
   $viewPageHeader.textContent = 'Saved Images';
   changeBackground('autumn');
@@ -199,13 +200,14 @@ function generateGetWeatherPage(response) {
 
 function generateRandomImage(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
-  $mainHeading.className = 'heading hidden';
+  $mainHeading.className = 'heading';
   newPic = response.artObjects[i].webImage.url;
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
   newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
   $mainContainer.className = 'main-container content-wrap';
   $headerColor.className = 'header normal';
+  $mainHeader.textContent = 'Random Painting';
   $homePage.className = 'homepage hidden';
   $randomPage.className = 'randompage';
   var $infoContainerColumnMost = document.createElement('div');
@@ -242,6 +244,7 @@ function goBack(event) {
   $homePage.className = 'homepage view';
   $viewPage.className = 'viewpage hidden';
   $weatherPage.className = 'weatherpage hidden';
+  $mainHeader.textContent = 'Get Weather';
   $headerColor.className = 'header normal';
   $viewPageHeader.className = 'hidden';
   $mainHeading.className = 'heading view';
@@ -308,7 +311,7 @@ function generateWeatherContent(response) {
     $mainHeading.className = 'heading hidden';
     $weatherHeading.className = 'view';
     $weatherHeading.textContent = weatherCondition + '  ' + cityTemp + ' \u00B0F';
-    $headingContainer.appendChild($weatherHeading);
+    $headingContainer.prepend($weatherHeading);
     getArtWeather(weatherCondition);
     $weatherContainer.className = 'weather-container';
     $weatherPage.appendChild($weatherContainer);
@@ -385,7 +388,6 @@ function getArtWeather(weather) {
 function generateWeatherPicture(response) {
   var i = Math.floor(Math.random() * response.artObjects.length);
   newPic = response.artObjects[i].webImage.url;
-
   newPicTitle = response.artObjects[i].title;
   newArtistName = response.artObjects[i].principalOrFirstMaker;
   newPicAlt = newPicTitle + ' ' + 'by' + ' ' + newArtistName;
@@ -397,7 +399,6 @@ function generateWeatherPicture(response) {
   var $newImage = document.createElement('img');
   var $infoContainerColumnMost = document.createElement('div');
   var $infoContainerColumnSome = document.createElement('div');
-
   $newImage.setAttribute('src', newPic);
   $newImage.setAttribute('alt', newPicAlt);
   $newImage.className = 'main-pic';
