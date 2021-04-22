@@ -38,6 +38,8 @@ var $bigHeart = document.createElement('i');
 var $overlay = document.createElement('div');
 var $viewFullImage = document.createElement('img');
 var $infoContainer = document.createElement('div');
+var $popUp = document.createElement('div');
+var $errorOverlay = document.createElement('div');
 
 var newPic;
 var newPicTitle;
@@ -89,6 +91,7 @@ function goToView(event) {
   removeContainer($infoContainer);
   removeContainer($weatherContainer);
   removeContainer($weatherImageContainer);
+  removeContainer($errorOverlay);
   $weatherPage.className = 'weatherpage hidden';
   $viewSaved.className = 'hidden';
   $headerColor.className = 'header hidden';
@@ -152,6 +155,7 @@ function changeBackground(weather) {
     generateRandomBackground(xhr.response);
     $loader.className = 'loader hidden';
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -174,6 +178,7 @@ function getArtData(weather) {
   xhr.addEventListener('load', function () {
     generateGetWeatherPage(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -185,6 +190,7 @@ function getRandomImage() {
   xhr.addEventListener('load', function () {
     generateRandomImage(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 
 }
@@ -255,6 +261,9 @@ function goBack(event) {
   removeContainer($errorContainer);
   removeContainer($imageContainer);
   removeContainer($infoContainer);
+  removeContainer($errorOverlay);
+  removeContainer($popUp);
+  $errorOverlay.className = 'hidden';
   $headerColor.className = 'header hidden';
   $weatherHeading.className = 'hidden';
   $overlay.className = 'hidden';
@@ -292,6 +301,7 @@ function getWeather(cityName) {
   xhr.addEventListener('load', function () {
     generateWeatherContent(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -382,6 +392,7 @@ function getArtWeather(weather) {
   xhr.addEventListener('load', function () {
     generateWeatherPicture(xhr.response);
   });
+  xhr.addEventListener('error', () => loadError());
   xhr.send();
 }
 
@@ -467,4 +478,13 @@ function closePopUp() {
 
 function errorMessage() {
   $searchCity.textContent = 'Search by City';
+}
+
+function loadError() {
+  $loader.className = 'loader hidden';
+  $mainContainer.prepend($errorOverlay);
+  $errorOverlay.className = 'error-overlay';
+  $errorOverlay.append($popUp);
+  $popUp.className = 'pop-up';
+  $popUp.textContent = 'Oops Something Went Wrong. Please Try Again!';
 }
